@@ -25,7 +25,7 @@ export default function App() {
   }, [isEditing]);
 
   return (
-    <div>
+    <div className='px-8 py-4'>
       <header className='flex flex-row'>
         <h1>Pokedex</h1>
         <button
