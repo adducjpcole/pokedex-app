@@ -8,7 +8,7 @@ import properCase from '../utils/properCase';
 export default function PokemonCard({ onClick, name, image }) {
   return (
     <button
-      className="flex flex-col items-center hover:cursor-pointer"
+      className="flex flex-col items-center hover:cursor-pointer hover:scale-105 transition-transform active:scale-95"
       onClick={onClick}
     >
       <h1>{properCase(name)}</h1>

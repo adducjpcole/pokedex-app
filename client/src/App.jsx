@@ -7,6 +7,7 @@ export default function App() {
   const [isAsideOpen, setAsideOpen] = useState(false);
   const [pokemonList, setPokemonList] = useState([]);
   const [isEditing, setEditing] = useState(false);
+  const [isDeleting, setDeleting] = useState(false);
 
   useEffect(() => {
     async function fetchPokemon() {
@@ -25,9 +26,18 @@ export default function App() {
 
   return (
     <div>
-      <main>
+      <header className='flex flex-row'>
         <h1>Pokedex</h1>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+        <button
+          className="hover:cursor-pointer"
+          onClick={() => setDeleting(true)}
+        >
+          Create Entry
+        </button>
+      </header>
+
+      <main>
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-x-8 gap-y-4">
           {pokemonList && pokemonList.length > 0 ? (
             pokemonList.map((v) => (
               <PokemonCard
@@ -117,6 +127,12 @@ export default function App() {
             onClick={() => setEditing(true)}
           >
             Edit
+          </button>
+          <button
+            className="hover:cursor-pointer"
+            onClick={() => setDeleting(true)}
+          >
+            Delete
           </button>
         </div>
       </aside>
