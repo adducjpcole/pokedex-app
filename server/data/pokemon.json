@@ -1,0 +1,1112 @@
+[
+  {
+    "id": 31,
+    "name": "nidoqueen",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/31.png",
+    "desc": "Its hard scales provide strong protection. It uses its hefty bulk to execute powerful moves.",
+    "weight": 60,
+    "height": 1.3,
+    "baseExperience": 227,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 90
+      },
+      {
+        "name": "attack",
+        "value": 92
+      },
+      {
+        "name": "defense",
+        "value": 87
+      },
+      {
+        "name": "special-attack",
+        "value": 75
+      },
+      {
+        "name": "special-defense",
+        "value": 85
+      },
+      {
+        "name": "speed",
+        "value": 76
+      }
+    ],
+    "abilities": ["poison-point", "rivalry", "sheer-force"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/31.ogg"
+  },
+  {
+    "id": 32,
+    "name": "nidoran-m",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/32.png",
+    "desc": "Stiffens its ears to sense danger. The larger its horns, the more powerful its secreted venom.",
+    "weight": 9,
+    "height": 0.5,
+    "baseExperience": 55,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 46
+      },
+      {
+        "name": "attack",
+        "value": 57
+      },
+      {
+        "name": "defense",
+        "value": 40
+      },
+      {
+        "name": "special-attack",
+        "value": 40
+      },
+      {
+        "name": "special-defense",
+        "value": 40
+      },
+      {
+        "name": "speed",
+        "value": 50
+      }
+    ],
+    "abilities": ["poison-point", "rivalry", "hustle"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/32.ogg"
+  },
+  {
+    "id": 33,
+    "name": "nidorino",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/33.png",
+    "desc": "An aggressive POKéMON that is quick to attack. The horn on its head secretes a powerful venom.",
+    "weight": 19.5,
+    "height": 0.9,
+    "baseExperience": 128,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 61
+      },
+      {
+        "name": "attack",
+        "value": 72
+      },
+      {
+        "name": "defense",
+        "value": 57
+      },
+      {
+        "name": "special-attack",
+        "value": 55
+      },
+      {
+        "name": "special-defense",
+        "value": 55
+      },
+      {
+        "name": "speed",
+        "value": 65
+      }
+    ],
+    "abilities": ["poison-point", "rivalry", "hustle"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/33.ogg"
+  },
+  {
+    "id": 34,
+    "name": "nidoking",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/34.png",
+    "desc": "It uses its powerful tail in battle to smash, constrict, then break the prey's bones.",
+    "weight": 62,
+    "height": 1.4,
+    "baseExperience": 227,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 81
+      },
+      {
+        "name": "attack",
+        "value": 102
+      },
+      {
+        "name": "defense",
+        "value": 77
+      },
+      {
+        "name": "special-attack",
+        "value": 85
+      },
+      {
+        "name": "special-defense",
+        "value": 75
+      },
+      {
+        "name": "speed",
+        "value": 85
+      }
+    ],
+    "abilities": ["poison-point", "rivalry", "sheer-force"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/34.ogg"
+  },
+  {
+    "id": 35,
+    "name": "clefairy",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/35.png",
+    "desc": "Its magical and cute appeal has many admirers. It is rare and found only in certain areas.",
+    "weight": 7.5,
+    "height": 0.6,
+    "baseExperience": 113,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 70
+      },
+      {
+        "name": "attack",
+        "value": 45
+      },
+      {
+        "name": "defense",
+        "value": 48
+      },
+      {
+        "name": "special-attack",
+        "value": 60
+      },
+      {
+        "name": "special-defense",
+        "value": 65
+      },
+      {
+        "name": "speed",
+        "value": 35
+      }
+    ],
+    "abilities": ["cute-charm", "magic-guard", "friend-guard"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/35.ogg"
+  },
+  {
+    "id": 36,
+    "name": "clefable",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png",
+    "desc": "A timid fairy POKéMON that is rarely seen. It will run and hide the moment it senses people.",
+    "weight": 40,
+    "height": 1.3,
+    "baseExperience": 217,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 95
+      },
+      {
+        "name": "attack",
+        "value": 70
+      },
+      {
+        "name": "defense",
+        "value": 73
+      },
+      {
+        "name": "special-attack",
+        "value": 95
+      },
+      {
+        "name": "special-defense",
+        "value": 90
+      },
+      {
+        "name": "speed",
+        "value": 60
+      }
+    ],
+    "abilities": ["cute-charm", "magic-guard", "unaware"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/36.ogg"
+  },
+  {
+    "id": 37,
+    "name": "vulpix",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/37.png",
+    "desc": "At the time of birth, it has just one tail. The tail splits from its tip as it grows older.",
+    "weight": 9.9,
+    "height": 0.6,
+    "baseExperience": 60,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 38
+      },
+      {
+        "name": "attack",
+        "value": 41
+      },
+      {
+        "name": "defense",
+        "value": 40
+      },
+      {
+        "name": "special-attack",
+        "value": 50
+      },
+      {
+        "name": "special-defense",
+        "value": 65
+      },
+      {
+        "name": "speed",
+        "value": 65
+      }
+    ],
+    "abilities": ["flash-fire", "drought"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/37.ogg"
+  },
+  {
+    "id": 38,
+    "name": "ninetales",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/38.png",
+    "desc": "Very smart and very vengeful. Grabbing one of its many tails could result in a 1000-year curse.",
+    "weight": 19.9,
+    "height": 1.1,
+    "baseExperience": 177,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 73
+      },
+      {
+        "name": "attack",
+        "value": 76
+      },
+      {
+        "name": "defense",
+        "value": 75
+      },
+      {
+        "name": "special-attack",
+        "value": 81
+      },
+      {
+        "name": "special-defense",
+        "value": 100
+      },
+      {
+        "name": "speed",
+        "value": 100
+      }
+    ],
+    "abilities": ["flash-fire", "drought"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/38.ogg"
+  },
+  {
+    "id": 39,
+    "name": "jigglypuff",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",
+    "desc": "When its huge eyes light up, it sings a mysteriously soothing melody that lulls its enemies to sleep.",
+    "weight": 5.5,
+    "height": 0.5,
+    "baseExperience": 95,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 115
+      },
+      {
+        "name": "attack",
+        "value": 45
+      },
+      {
+        "name": "defense",
+        "value": 20
+      },
+      {
+        "name": "special-attack",
+        "value": 45
+      },
+      {
+        "name": "special-defense",
+        "value": 25
+      },
+      {
+        "name": "speed",
+        "value": 20
+      }
+    ],
+    "abilities": ["cute-charm", "competitive", "friend-guard"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/39.ogg"
+  },
+  {
+    "id": 40,
+    "name": "wigglytuff",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/40.png",
+    "desc": "The body is soft and rubbery. When angered, it will suck in air and inflate itself to an enormous size.",
+    "weight": 12,
+    "height": 1,
+    "baseExperience": 196,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 140
+      },
+      {
+        "name": "attack",
+        "value": 70
+      },
+      {
+        "name": "defense",
+        "value": 45
+      },
+      {
+        "name": "special-attack",
+        "value": 85
+      },
+      {
+        "name": "special-defense",
+        "value": 50
+      },
+      {
+        "name": "speed",
+        "value": 45
+      }
+    ],
+    "abilities": ["cute-charm", "competitive", "frisk"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/40.ogg"
+  },
+  {
+    "id": 41,
+    "name": "zubat",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/41.png",
+    "desc": "Forms colonies in perpetually dark places. Uses ultrasonic waves to identify and approach targets.",
+    "weight": 7.5,
+    "height": 0.8,
+    "baseExperience": 49,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 40
+      },
+      {
+        "name": "attack",
+        "value": 45
+      },
+      {
+        "name": "defense",
+        "value": 35
+      },
+      {
+        "name": "special-attack",
+        "value": 30
+      },
+      {
+        "name": "special-defense",
+        "value": 40
+      },
+      {
+        "name": "speed",
+        "value": 55
+      }
+    ],
+    "abilities": ["inner-focus", "infiltrator"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/41.ogg"
+  },
+  {
+    "id": 42,
+    "name": "golbat",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/42.png",
+    "desc": "Once it strikes, it will not stop draining energy from the victim even if it gets too heavy to fly.",
+    "weight": 55,
+    "height": 1.6,
+    "baseExperience": 159,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 75
+      },
+      {
+        "name": "attack",
+        "value": 80
+      },
+      {
+        "name": "defense",
+        "value": 70
+      },
+      {
+        "name": "special-attack",
+        "value": 65
+      },
+      {
+        "name": "special-defense",
+        "value": 75
+      },
+      {
+        "name": "speed",
+        "value": 90
+      }
+    ],
+    "abilities": ["inner-focus", "infiltrator"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/42.ogg"
+  },
+  {
+    "id": 43,
+    "name": "oddish",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/43.png",
+    "desc": "During the day, it keeps its face buried in the ground. At night, it wanders around sowing its seeds.",
+    "weight": 5.4,
+    "height": 0.5,
+    "baseExperience": 64,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 45
+      },
+      {
+        "name": "attack",
+        "value": 50
+      },
+      {
+        "name": "defense",
+        "value": 55
+      },
+      {
+        "name": "special-attack",
+        "value": 75
+      },
+      {
+        "name": "special-defense",
+        "value": 65
+      },
+      {
+        "name": "speed",
+        "value": 30
+      }
+    ],
+    "abilities": ["chlorophyll", "run-away"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/43.ogg"
+  },
+  {
+    "id": 44,
+    "name": "gloom",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/44.png",
+    "desc": "The fluid that oozes from its mouth isn't drool. It is a nectar that is used to attract prey.",
+    "weight": 8.6,
+    "height": 0.8,
+    "baseExperience": 138,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 60
+      },
+      {
+        "name": "attack",
+        "value": 65
+      },
+      {
+        "name": "defense",
+        "value": 70
+      },
+      {
+        "name": "special-attack",
+        "value": 85
+      },
+      {
+        "name": "special-defense",
+        "value": 75
+      },
+      {
+        "name": "speed",
+        "value": 40
+      }
+    ],
+    "abilities": ["chlorophyll", "stench"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/44.ogg"
+  },
+  {
+    "id": 45,
+    "name": "vileplume",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png",
+    "desc": "It has the world’s largest petals. With every step, the petals shake out heavy clouds of toxic pollen.",
+    "weight": 18.6,
+    "height": 1.2,
+    "baseExperience": 221,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 75
+      },
+      {
+        "name": "attack",
+        "value": 80
+      },
+      {
+        "name": "defense",
+        "value": 85
+      },
+      {
+        "name": "special-attack",
+        "value": 110
+      },
+      {
+        "name": "special-defense",
+        "value": 90
+      },
+      {
+        "name": "speed",
+        "value": 50
+      }
+    ],
+    "abilities": ["chlorophyll", "effect-spore"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/45.ogg"
+  },
+  {
+    "id": 46,
+    "name": "paras",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/46.png",
+    "desc": "Burrows to suck tree roots. The mushrooms on its back grow by draw­ ing nutrients from the bug host.",
+    "weight": 5.4,
+    "height": 0.3,
+    "baseExperience": 57,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 35
+      },
+      {
+        "name": "attack",
+        "value": 70
+      },
+      {
+        "name": "defense",
+        "value": 55
+      },
+      {
+        "name": "special-attack",
+        "value": 45
+      },
+      {
+        "name": "special-defense",
+        "value": 55
+      },
+      {
+        "name": "speed",
+        "value": 25
+      }
+    ],
+    "abilities": ["effect-spore", "dry-skin", "damp"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/46.ogg"
+  },
+  {
+    "id": 47,
+    "name": "parasect",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/47.png",
+    "desc": "A host-parasite pair in which the parasite mushroom has taken over the host bug. Prefers damp places.",
+    "weight": 29.5,
+    "height": 1,
+    "baseExperience": 142,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 60
+      },
+      {
+        "name": "attack",
+        "value": 95
+      },
+      {
+        "name": "defense",
+        "value": 80
+      },
+      {
+        "name": "special-attack",
+        "value": 60
+      },
+      {
+        "name": "special-defense",
+        "value": 80
+      },
+      {
+        "name": "speed",
+        "value": 30
+      }
+    ],
+    "abilities": ["effect-spore", "dry-skin", "damp"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/47.ogg"
+  },
+  {
+    "id": 48,
+    "name": "venonat",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/48.png",
+    "desc": "Lives in the shadows of tall trees where it eats insects. It is attracted by light at night.",
+    "weight": 30,
+    "height": 1,
+    "baseExperience": 61,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 60
+      },
+      {
+        "name": "attack",
+        "value": 55
+      },
+      {
+        "name": "defense",
+        "value": 50
+      },
+      {
+        "name": "special-attack",
+        "value": 40
+      },
+      {
+        "name": "special-defense",
+        "value": 55
+      },
+      {
+        "name": "speed",
+        "value": 45
+      }
+    ],
+    "abilities": ["compound-eyes", "tinted-lens", "run-away"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/48.ogg"
+  },
+  {
+    "id": 49,
+    "name": "venomoth",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/49.png",
+    "desc": "The dustlike scales covering its wings are color-coded to indicate the kinds of poison it has.",
+    "weight": 12.5,
+    "height": 1.5,
+    "baseExperience": 158,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 70
+      },
+      {
+        "name": "attack",
+        "value": 65
+      },
+      {
+        "name": "defense",
+        "value": 60
+      },
+      {
+        "name": "special-attack",
+        "value": 90
+      },
+      {
+        "name": "special-defense",
+        "value": 75
+      },
+      {
+        "name": "speed",
+        "value": 90
+      }
+    ],
+    "abilities": ["shield-dust", "tinted-lens", "wonder-skin"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/49.ogg"
+  },
+  {
+    "id": 50,
+    "name": "diglett",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/50.png",
+    "desc": "Lives about one yard underground where it feeds on plant roots. It sometimes appears above ground.",
+    "weight": 0.8,
+    "height": 0.2,
+    "baseExperience": 53,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 10
+      },
+      {
+        "name": "attack",
+        "value": 55
+      },
+      {
+        "name": "defense",
+        "value": 25
+      },
+      {
+        "name": "special-attack",
+        "value": 35
+      },
+      {
+        "name": "special-defense",
+        "value": 45
+      },
+      {
+        "name": "speed",
+        "value": 95
+      }
+    ],
+    "abilities": ["sand-veil", "arena-trap", "sand-force"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/50.ogg"
+  },
+  {
+    "id": 51,
+    "name": "dugtrio",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/51.png",
+    "desc": "A team of DIGLETT triplets. It triggers huge earthquakes by burrowing 60 miles underground.",
+    "weight": 33.3,
+    "height": 0.7,
+    "baseExperience": 149,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 35
+      },
+      {
+        "name": "attack",
+        "value": 100
+      },
+      {
+        "name": "defense",
+        "value": 50
+      },
+      {
+        "name": "special-attack",
+        "value": 50
+      },
+      {
+        "name": "special-defense",
+        "value": 70
+      },
+      {
+        "name": "speed",
+        "value": 120
+      }
+    ],
+    "abilities": ["sand-veil", "arena-trap", "sand-force"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/51.ogg"
+  },
+  {
+    "id": 52,
+    "name": "meowth",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png",
+    "desc": "It washes its face regularly to keep the coin on its forehead spotless. It doesn’t get along with Galarian Meowth.",
+    "weight": 4.2,
+    "height": 0.4,
+    "baseExperience": 58,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 40
+      },
+      {
+        "name": "attack",
+        "value": 45
+      },
+      {
+        "name": "defense",
+        "value": 35
+      },
+      {
+        "name": "special-attack",
+        "value": 40
+      },
+      {
+        "name": "special-defense",
+        "value": 40
+      },
+      {
+        "name": "speed",
+        "value": 90
+      }
+    ],
+    "abilities": ["pickup", "technician", "unnerve"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/52.ogg"
+  },
+  {
+    "id": 53,
+    "name": "persian",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/53.png",
+    "desc": "Although its fur has many admirers, it is tough to raise as a pet because of its fickle meanness.",
+    "weight": 32,
+    "height": 1,
+    "baseExperience": 154,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 65
+      },
+      {
+        "name": "attack",
+        "value": 70
+      },
+      {
+        "name": "defense",
+        "value": 60
+      },
+      {
+        "name": "special-attack",
+        "value": 65
+      },
+      {
+        "name": "special-defense",
+        "value": 65
+      },
+      {
+        "name": "speed",
+        "value": 115
+      }
+    ],
+    "abilities": ["limber", "technician", "unnerve"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/53.ogg"
+  },
+  {
+    "id": 54,
+    "name": "psyduck",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png",
+    "desc": "While lulling its enemies with its vacant look, this wily POKéMON will use psychokinetic powers.",
+    "weight": 19.6,
+    "height": 0.8,
+    "baseExperience": 64,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 50
+      },
+      {
+        "name": "attack",
+        "value": 52
+      },
+      {
+        "name": "defense",
+        "value": 48
+      },
+      {
+        "name": "special-attack",
+        "value": 65
+      },
+      {
+        "name": "special-defense",
+        "value": 50
+      },
+      {
+        "name": "speed",
+        "value": 55
+      }
+    ],
+    "abilities": ["damp", "cloud-nine", "swift-swim"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/54.ogg"
+  },
+  {
+    "id": 55,
+    "name": "golduck",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/55.png",
+    "desc": "Often seen swim­ ming elegantly by lake shores. It is often mistaken for the Japanese monster, Kappa.",
+    "weight": 76.6,
+    "height": 1.7,
+    "baseExperience": 175,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 80
+      },
+      {
+        "name": "attack",
+        "value": 82
+      },
+      {
+        "name": "defense",
+        "value": 78
+      },
+      {
+        "name": "special-attack",
+        "value": 95
+      },
+      {
+        "name": "special-defense",
+        "value": 80
+      },
+      {
+        "name": "speed",
+        "value": 85
+      }
+    ],
+    "abilities": ["damp", "cloud-nine", "swift-swim"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/55.ogg"
+  },
+  {
+    "id": 56,
+    "name": "mankey",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/56.png",
+    "desc": "Extremely quick to anger. It could be docile one moment then thrashing away the next instant.",
+    "weight": 28,
+    "height": 0.5,
+    "baseExperience": 61,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 40
+      },
+      {
+        "name": "attack",
+        "value": 80
+      },
+      {
+        "name": "defense",
+        "value": 35
+      },
+      {
+        "name": "special-attack",
+        "value": 35
+      },
+      {
+        "name": "special-defense",
+        "value": 45
+      },
+      {
+        "name": "speed",
+        "value": 70
+      }
+    ],
+    "abilities": ["vital-spirit", "anger-point", "defiant"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/56.ogg"
+  },
+  {
+    "id": 57,
+    "name": "primeape",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/57.png",
+    "desc": "Always furious and tenacious to boot. It will not abandon chasing its quarry until it is caught.",
+    "weight": 32,
+    "height": 1,
+    "baseExperience": 159,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 65
+      },
+      {
+        "name": "attack",
+        "value": 105
+      },
+      {
+        "name": "defense",
+        "value": 60
+      },
+      {
+        "name": "special-attack",
+        "value": 60
+      },
+      {
+        "name": "special-defense",
+        "value": 70
+      },
+      {
+        "name": "speed",
+        "value": 95
+      }
+    ],
+    "abilities": ["vital-spirit", "anger-point", "defiant"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/57.ogg"
+  },
+  {
+    "id": 58,
+    "name": "growlithe",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/58.png",
+    "desc": "Very protective of its territory. It will bark and bite to repel intruders from its space.",
+    "weight": 19,
+    "height": 0.7,
+    "baseExperience": 70,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 55
+      },
+      {
+        "name": "attack",
+        "value": 70
+      },
+      {
+        "name": "defense",
+        "value": 45
+      },
+      {
+        "name": "special-attack",
+        "value": 70
+      },
+      {
+        "name": "special-defense",
+        "value": 50
+      },
+      {
+        "name": "speed",
+        "value": 60
+      }
+    ],
+    "abilities": ["intimidate", "flash-fire", "justified"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/58.ogg"
+  },
+  {
+    "id": 59,
+    "name": "arcanine",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png",
+    "desc": "A POKéMON that has been admired since the past for its beauty. It runs agilely as if on wings.",
+    "weight": 155,
+    "height": 1.9,
+    "baseExperience": 194,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 90
+      },
+      {
+        "name": "attack",
+        "value": 110
+      },
+      {
+        "name": "defense",
+        "value": 80
+      },
+      {
+        "name": "special-attack",
+        "value": 100
+      },
+      {
+        "name": "special-defense",
+        "value": 80
+      },
+      {
+        "name": "speed",
+        "value": 95
+      }
+    ],
+    "abilities": ["intimidate", "flash-fire", "justified"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/59.ogg"
+  },
+  {
+    "id": 60,
+    "name": "poliwag",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png",
+    "desc": "Its newly grown legs prevent it from running. It appears to prefer swimming than trying to stand.",
+    "weight": 12.4,
+    "height": 0.6,
+    "baseExperience": 60,
+    "stats": [
+      {
+        "name": "hp",
+        "value": 40
+      },
+      {
+        "name": "attack",
+        "value": 50
+      },
+      {
+        "name": "defense",
+        "value": 40
+      },
+      {
+        "name": "special-attack",
+        "value": 40
+      },
+      {
+        "name": "special-defense",
+        "value": 40
+      },
+      {
+        "name": "speed",
+        "value": 90
+      }
+    ],
+    "abilities": ["water-absorb", "damp", "swift-swim"],
+    "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/60.ogg"
+  }
+]
