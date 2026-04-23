@@ -86,7 +86,18 @@ export default function App() {
         pokemon={pokemon}
         mode={panelMode}
         onClose={() => setPanelOpen(false)}
-        onStartEdit={() => setPanelMode('edit')}
+        onStartEdit={() => {
+          if (isPanelOpen) {
+            setPanelOpen(false);
+            setTimeout(() => {
+              setPanelMode('edit');
+              setPanelOpen(true);
+            }, 150);
+          } else {
+            setPanelMode('edit');
+            setPanelOpen(true);
+          }
+        }}
         onFinishEdit={() => setPanelMode('view')}
         onFinishCreate={() => setPanelMode('view')}
       />
