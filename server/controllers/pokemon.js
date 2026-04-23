@@ -12,6 +12,10 @@ async function writePokemonList(list) {
   await queueWrite(() => writeFile(DATA_FILE, JSON.stringify(list, null, 2)));
 }
 
+/**
+ * @template {{ id: number }} T
+ * @param {Array<T>} list
+ */
 function getNextId(list) {
   return list.reduce((max, p) => Math.max(max, p.id ?? 0), 0) + 1;
 }
@@ -30,6 +34,9 @@ function tryParseJsonField(value, fallback) {
   return value;
 }
 
+/**
+ * @returns {CustomPokemon|string}
+ */
 function tryParsePokemonInput({ body, file }) {
   const name = typeof body.name === 'string' ? body.name.trim() : '';
   const desc = typeof body.desc === 'string' ? body.desc.trim() : '';
@@ -64,6 +71,9 @@ function tryParsePokemonInput({ body, file }) {
   };
 }
 
+/**
+ * @param {CustomPokemon} data
+ */
 function validatePokemon(data) {
   if (!data.name) return 'Pokemon name cannot be empty';
   if (!data.desc) return 'Description cannot be empty';

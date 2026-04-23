@@ -1,11 +1,10 @@
-import React from 'react';
 import properCase from '../utils/properCase';
 
 /**
  * @param {string} id
  * @param {React.MouseEventHandler<HTMLButtonElement>} onClick
  */
-export default function PokemonCard({ onClick, name, image }) {
+export default function PokemonListItem({ onClick, name, image }) {
   return (
     <button
       className="flex flex-col items-center hover:cursor-pointer hover:scale-105 transition-transform active:scale-95"

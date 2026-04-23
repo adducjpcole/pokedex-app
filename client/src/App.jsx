@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import PokemonCard from './components/PokemonCard';
-import properCase from './utils/properCase';
+import PokemonListItem from './components/PokemonListItem.jsx';
+import PokemonPanel from './widgets/PokemonPanel/index.jsx';
 
 export default function App() {
-  const [selectedPokemon, setSelectedPokemon] = useState(null);
-  const [isAsideOpen, setAsideOpen] = useState(false);
   const [pokemonList, setPokemonList] = useState([]);
-  const [isEditing, setEditing] = useState(false);
-  const [isDeleting, setDeleting] = useState(false);
+  const [pokemon, setPokemon] = useState(null);
+  const [isPanelOpen, setPanelOpen] = useState(false);
+  const [panelMode, setPanelMode] = useState('view');
 
   useEffect(() => {
     async function fetchPokemon() {
@@ -15,22 +14,32 @@ export default function App() {
         const res = await fetch(`http://localhost:9443/pokemon`);
         const data = await res.json();
         setPokemonList(data);
-        console.log(data);
       } catch (err) {
         console.error(err);
       }
     }
 
     fetchPokemon();
-  }, [isEditing]);
+  }, [panelMode]);
 
   return (
-    <div className='px-8 py-4'>
-      <header className='flex flex-row'>
-        <h1>Pokedex</h1>
+    <div className="px-8 py-4">
+      <header className="flex flex-row">
+        <h1>POKéDEX</h1>
         <button
           className="hover:cursor-pointer"
-          onClick={() => setDeleting(true)}
+          onClick={() => {
+            if (isPanelOpen) {
+              setPanelOpen(false);
+              setTimeout(() => {
+                setPanelMode('create');
+                setPanelOpen(true);
+              }, 150);
+            } else {
+              setPanelMode('create');
+              setPanelOpen(true);
+            }
+          }}
         >
           Create Entry
         </button>
@@ -40,30 +49,31 @@ export default function App() {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-x-8 gap-y-4">
           {pokemonList && pokemonList.length > 0 ? (
             pokemonList.map((v) => (
-              <PokemonCard
+              <PokemonListItem
                 key={v.id}
                 onClick={() => {
-                  if (selectedPokemon && selectedPokemon.id === v.id) {
-                    setAsideOpen((v) => !v);
+                  if (panelMode === 'view' && pokemon?.id === v.id) {
+                    setPanelOpen((prev) => !prev);
+                    if (!isPanelOpen) setPanelMode('view');
                     return;
                   }
 
-                  if (isAsideOpen) {
-                    setAsideOpen(false);
+                  const openWithPokemon = () => {
+                    setPokemon(v);
+                    setPanelMode('view');
+                    setPanelOpen(true);
+                  };
 
-                    setTimeout(() => {
-                      setAsideOpen(true);
-                      setSelectedPokemon(v);
-                    }, 150);
-                    return;
+                  if (isPanelOpen) {
+                    setPanelOpen(false);
+                    setTimeout(openWithPokemon, 150);
+                  } else {
+                    openWithPokemon();
                   }
-
-                  setAsideOpen(true);
-                  setSelectedPokemon(v);
                 }}
                 name={v.name}
                 image={v.image}
-              ></PokemonCard>
+              ></PokemonListItem>
             ))
           ) : (
             <p>Loading...</p>
@@ -71,71 +81,15 @@ export default function App() {
         </div>
       </main>
 
-      <aside
-        className={`fixed right-0 top-0 w-1/4 z-10 bg-white p-4 ${isAsideOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform`}
-      >
-        <button
-          className="hover:cursor-pointer"
-          onClick={() => {
-            setAsideOpen(false);
-          }}
-        >
-          Close
-        </button>
-
-        {selectedPokemon && (
-          <>
-            <h1>{properCase(selectedPokemon.name)}</h1>
-            <img src={selectedPokemon.image} />
-            <p>{selectedPokemon.desc}</p>
-            <p>weight: {selectedPokemon.weight}</p>
-            <p>height: {selectedPokemon.height}</p>
-            <p>base experience: {selectedPokemon.baseExperience}</p>
-            <div>
-              stats
-              <ul>
-                {selectedPokemon.stats.map((v) => (
-                  <li key={v.name}>
-                    {v.name}: {v.value}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              abilities
-              <ul>
-                {selectedPokemon.abilities.map((v, i) => (
-                  <li key={i}>{v}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              cries
-              <audio controls>
-                <source src={selectedPokemon.cries} type="audio/mpeg" />
-                Your browser does not support the audio tag.
-              </audio>
-            </div>
-          </>
-        )}
-
-        <div>
-          <button
-            className="hover:cursor-pointer"
-            onClick={() => setEditing(true)}
-          >
-            Edit
-          </button>
-          <button
-            className="hover:cursor-pointer"
-            onClick={() => setDeleting(true)}
-          >
-            Delete
-          </button>
-        </div>
-      </aside>
+      <PokemonPanel
+        isOpen={isPanelOpen}
+        pokemon={pokemon}
+        mode={panelMode}
+        onClose={() => setPanelOpen(false)}
+        onStartEdit={() => setPanelMode('edit')}
+        onFinishEdit={() => setPanelMode('view')}
+        onFinishCreate={() => setPanelMode('view')}
+      />
     </div>
   );
 }
