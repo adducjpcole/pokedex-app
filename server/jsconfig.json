@@ -3,5 +3,5 @@
     "noImplicitAny": false
   },
   "exclude": ["node_modules"],
-  "include": ["**/*", "global.d.js"]
+  "include": ["./**/*", "./globals.d.js"]
 }
