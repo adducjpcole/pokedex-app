@@ -55,7 +55,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <h1 className="text-2xl font-bold inline-block px-2 py-1">
           Editing {properCase(form.name)}
