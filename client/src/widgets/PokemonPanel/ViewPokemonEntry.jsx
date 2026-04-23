@@ -3,10 +3,12 @@ import properCase from '@/utils/properCase.js';
 /**
  * @param {Object} param
  * @param {Pokemon} param.pokemon
+ * @param {(Pokemon) => void} param.onDelete
+ * @param {(Pokemon) => void} param.onStartEdit
  */
-export default function ViewPokemonDetails({ pokemon }) {
+export default function ViewPokemonEntry({ pokemon, onDelete, onStartEdit }) {
   return (
-    <>
+    <div>
       <h1>{properCase(pokemon.name)}</h1>
       <img src={pokemon.image} />
       <p>{pokemon.desc}</p>
@@ -42,6 +44,13 @@ export default function ViewPokemonDetails({ pokemon }) {
           </audio>
         </div>
       )}
-    </>
+
+      <button className="hover:cursor-pointer" onClick={onStartEdit}>
+        Edit
+      </button>
+      <button className="hover:cursor-pointer" onClick={onDelete}>
+        Delete
+      </button>
+    </div>
   );
 }

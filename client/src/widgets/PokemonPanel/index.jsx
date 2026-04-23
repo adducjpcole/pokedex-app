@@ -1,3 +1,4 @@
+import EditPokemonEntry from './EditPokemonEntry.jsx';
 import ViewPokemonEntry from './ViewPokemonEntry.jsx';
 
 /**
@@ -10,9 +11,9 @@ import ViewPokemonEntry from './ViewPokemonEntry.jsx';
  * @param {CustomPokemon} param.pokemon
  * @param {PokemonPanelMode} param.mode
  * @param {() => void} param.onClose
- * @param {(Pokemon) => void} param.onStartEdit
- * @param {(Pokemon) => void} param.onFinishEdit
  * @param {(Pokemon) => void} param.onDelete
+ * @param {(Pokemon) => void} param.onStartEdit
+ * @param {(CustomPokemon) => void} param.onFinishEdit
  * @param {(CustomPokemon) => void} param.onFinishCreate
  * @returns
  */
@@ -33,39 +34,28 @@ export default function PokemonPanel({
   // the original list (let parent handle the actual creation), just pass on what is to be added via finish create
   return (
     <aside
-      className={`fixed right-0 top-0 w-1/4 z-10 bg-white p-4 ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform`}
+      className={`fixed right-0 top-0 ${mode === 'view' ? 'w-1/4' : 'w-1/2'} z-10 bg-white shadow-2xl p-4 ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform max-h-screen overflow-y-auto`}
     >
       <button
         className="hover:cursor-pointer"
         onClick={() => {
-          // TODO: If in edit/create mode, prompt user if they are sure before closing (don't auto save)
-
           onClose();
         }}
       >
-        {mode == 'view' ? 'Close' : 'Cancel'}
+        Close
       </button>
 
-      {pokemon && mode === 'view' && <ViewPokemonEntry pokemon={pokemon} />}
-      {pokemon && mode === 'edit' && <p>editing {pokemon.name}</p>}
+      {pokemon && mode === 'view' && (
+        <ViewPokemonEntry
+          pokemon={pokemon}
+          onDelete={onDelete}
+          onStartEdit={onStartEdit}
+        />
+      )}
+      {pokemon && mode === 'edit' && <EditPokemonEntry pokemon={pokemon} />}
       {mode === 'create' && <p>creating new pokemon</p>}
 
       <div>
-        {mode === 'view' && (
-          <>
-            <button className="hover:cursor-pointer" onClick={onStartEdit}>
-              Edit
-            </button>
-            <button className="hover:cursor-pointer" onClick={onDelete}>
-              Delete
-            </button>
-          </>
-        )}
-        {mode === 'edit' && (
-          <button className="hover:cursor-pointer" onClick={onFinishEdit}>
-            Save Edit
-          </button>
-        )}
         {mode === 'create' && (
           <button className="hover:cursor-pointer" onClick={onFinishCreate}>
             Create Entry
