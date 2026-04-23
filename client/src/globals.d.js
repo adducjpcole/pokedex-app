@@ -14,6 +14,7 @@
 
 /**
  * @global
- * @typedef {CustomPokemon} Pokemon
- * @property {string} cries
+ * @extends {CustomPokemon}
+ * @typedef {Object} Pokemon
+ * @property {string|null} cries
  */

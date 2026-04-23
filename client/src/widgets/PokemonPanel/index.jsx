@@ -1,4 +1,4 @@
-import ViewPokemonDetails from './ViewPokemonDetails.jsx';
+import ViewPokemonEntry from './ViewPokemonEntry.jsx';
 
 /**
  * @typedef {'view'|'edit'|'create'} PokemonPanelMode
@@ -46,7 +46,7 @@ export default function PokemonPanel({
         {mode == 'view' ? 'Close' : 'Cancel'}
       </button>
 
-      {pokemon && mode === 'view' && <ViewPokemonDetails pokemon={pokemon} />}
+      {pokemon && mode === 'view' && <ViewPokemonEntry pokemon={pokemon} />}
       {pokemon && mode === 'edit' && <p>editing {pokemon.name}</p>}
       {mode === 'create' && <p>creating new pokemon</p>}
 

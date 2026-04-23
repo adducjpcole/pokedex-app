@@ -2,7 +2,7 @@ import properCase from '@/utils/properCase.js';
 
 /**
  * @param {Object} param
- * @param {CustomPokemon} param.pokemon
+ * @param {Pokemon} param.pokemon
  */
 export default function ViewPokemonDetails({ pokemon }) {
   return (
@@ -33,13 +33,15 @@ export default function ViewPokemonDetails({ pokemon }) {
         </ul>
       </div>
 
-      <div>
-        cries
-        <audio controls>
-          <source src={pokemon.cries} type="audio/mpeg" />
-          Your browser does not support the audio tag.
-        </audio>
-      </div>
+      {pokemon.cries !== null && (
+        <div>
+          cries
+          <audio controls key={pokemon.cries}>
+            <source src={pokemon.cries} type="audio/mpeg" />
+            Your browser does not support the audio tag.
+          </audio>
+        </div>
+      )}
     </>
   );
 }
