@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "install": "npm install && cd client && npm install && cd server && npm install",
+    "install-1": "cd client && npm install && cd server && npm install",
     "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\""
   },
   "devDependencies": {
