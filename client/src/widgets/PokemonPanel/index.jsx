@@ -26,7 +26,7 @@ export default function PokemonPanel({
 }) {
   return (
     <aside
-      className={`fixed right-0 top-0 w-fit z-10 bg-white shadow-2xl p-4 ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform max-h-screen overflow-y-auto`}
+      className={`fixed right-0 top-0 w-full md:w-1/2 z-10 bg-white shadow-2xl p-4 ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform max-h-screen overflow-y-auto`}
     >
       <button
         className="hover:cursor-pointer"
