@@ -1,4 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import Button from './components/Button.jsx';
+import Card from './components/Card.jsx';
+import InputField from './components/InputField.jsx';
+import InvertedButton from './components/InvertedButton.jsx';
+import LabeledField from './components/LabeledField.jsx';
+import LabeledInputField from './components/LabeledInputField.jsx';
 
 /**
  * @param {Object} props
@@ -138,194 +144,178 @@ export default function CreatePokemonEntry({ onFinishCreate }) {
     onFinishCreate(data);
   }
 
+  const imageFilePreview = useMemo(() => {
+    if (!form.imageFile) return '';
+
+    return URL.createObjectURL(form.imageFile);
+  }, [form.imageFile]);
+
+  useEffect(() => {
+    return () => {
+      if (imageFilePreview) {
+        URL.revokeObjectURL(imageFilePreview);
+      }
+    };
+  }, [imageFilePreview]);
+
+  const previewImage = imageFilePreview || form.imageUrl.trim();
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-bold inline-block px-2 py-1">
-          Create Pokémon
-        </h1>
-      </div>
-
-      <div className="flex gap-6">
-        <div className="w-40 shrink-0">
-          <div className="flex h-40 w-40 items-center justify-center rounded-lg border p-2">
-            {form.imageFile ? (
-              <img
-                src={URL.createObjectURL(form.imageFile)}
-                alt="Preview"
-                className="h-full w-full object-contain"
-              />
-            ) : form.imageUrl.trim() ? (
-              <img
-                src={form.imageUrl}
-                alt="Preview"
-                className="h-full w-full object-contain"
-              />
-            ) : (
-              <span className="text-sm text-gray-500">No image selected</span>
-            )}
-          </div>
-        </div>
-
-        <div className="flex-1 space-y-4">
-          <div>
-            <label className="block text-sm font-medium">Name</label>
-            <input
-              type="text"
-              value={form.name}
-              onChange={(e) => updateField('name', e.target.value)}
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Description</label>
-            <textarea
-              value={form.desc}
-              onChange={(e) => updateField('desc', e.target.value)}
-              rows={4}
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
-          </div>
-
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium">Weight</label>
-              <input
-                type="number"
-                value={form.weight}
-                onChange={(e) => updateField('weight', Number(e.target.value))}
-                className="mt-1 w-full rounded-md border px-3 py-2"
-              />
+    <form onSubmit={handleSubmit} className="space-y-5">
+      <Card>
+        <div className="flex gap-5 flex-row items-start">
+          <div className="space-y-4 w-1/3">
+            <div className="flex shrink-0 items-center justify-center rounded-4xl border border-slate-200 bg-slate-50 p-4 aspect-square">
+              {previewImage ? (
+                <img
+                  src={previewImage}
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <div className="flex items-center justify-center text-center text-sm text-slate-400">
+                  Add an image URL or upload an image to preview it here.
+                </div>
+              )}
             </div>
-            <div>
-              <label className="block text-sm font-medium">Height</label>
+
+            <LabeledField fieldName="Image URL">
               <input
-                type="number"
-                step="0.1"
-                value={form.height}
-                onChange={(e) => updateField('height', Number(e.target.value))}
-                className="mt-1 w-full rounded-md border px-3 py-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium">
-                Base Experience
-              </label>
-              <input
-                type="number"
-                value={form.baseExperience}
-                onChange={(e) =>
-                  updateField('baseExperience', Number(e.target.value))
+                type="url"
+                value={form.imageUrl}
+                onChange={(ev) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    imageUrl: ev.target.value,
+                    imageFile: ev.target.value.trim() ? null : prev.imageFile,
+                  }))
                 }
-                className="mt-1 w-full rounded-md border px-3 py-2"
+                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
+                placeholder="https://..."
+              />
+            </LabeledField>
+
+            <LabeledField fieldName="Upload Image">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageFileChange}
+                className="block w-full rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600 file:mr-4 file:rounded-xl file:border-0 file:bg-rose-600 file:px-4 file:py-2 file:font-semibold file:text-white hover:border-rose-200"
+              />
+            </LabeledField>
+          </div>
+
+          <div className="flex-1 space-y-4">
+            <LabeledInputField
+              fieldName="Name"
+              fieldType="text"
+              fieldValue={form.name}
+              onChange={(ev) => updateField('name', ev.target.value)}
+            />
+
+            <div className="grid gap-4 grid-cols-3">
+              <LabeledInputField
+                fieldName="Weight"
+                fieldType="number"
+                fieldValue={form.weight}
+                onChange={(ev) =>
+                  updateField('weight', Number(ev.target.value))
+                }
+              />
+              <LabeledInputField
+                fieldName="Height"
+                fieldType="number"
+                fieldValue={form.height}
+                onChange={(ev) =>
+                  updateField('height', Number(ev.target.value))
+                }
+              />
+              <LabeledInputField
+                fieldName="Base Exp"
+                fieldType="number"
+                fieldValue={form.baseExperience}
+                onChange={(ev) =>
+                  updateField('baseExperience', Number(ev.target.value))
+                }
               />
             </div>
-          </div>
 
-          <div>
-            <label className="block text-sm font-medium">Image URL</label>
-            <input
-              type="url"
-              value={form.imageUrl}
-              onChange={(e) =>
-                setForm((prev) => ({
-                  ...prev,
-                  imageUrl: e.target.value,
-                  imageFile: e.target.value.trim() ? null : prev.imageFile,
-                }))
-              }
-              className="mt-1 w-full rounded-md border px-3 py-2"
-              placeholder="https://..."
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium">Upload Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageFileChange}
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
+            <LabeledField fieldName="Description">
+              <textarea
+                value={form.desc}
+                onChange={(ev) => updateField('desc', ev.target.value)}
+                rows={4}
+                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
+              />
+            </LabeledField>
           </div>
         </div>
-      </div>
+      </Card>
 
-      <div className="rounded-lg border p-4">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Stats</h2>
+      <Card>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="text-lg font-bold tracking-tight">Stats</h2>
         </div>
 
         <div className="space-y-3">
           {form.stats.map((stat, index) => (
-            <div key={stat.name} className="grid grid-cols-[1fr_140px] gap-3">
-              <div className="rounded-md px-3 py-2">{stat.name}</div>
-              <input
-                type="number"
-                value={stat.value}
-                onChange={(e) => updateStat(index, e.target.value)}
-                className="w-full rounded-md border px-3 py-2"
+            <div
+              key={stat.name}
+              className="grid grid-cols-[1fr_0.25fr] items-center gap-3"
+            >
+              <div className="px-4 py-3 text-sm font-medium uppercase">
+                {stat.name}
+              </div>
+              <InputField
+                fieldType="number"
+                fieldValue={stat.value}
+                onChange={(ev) => updateStat(index, ev.target.value)}
               />
             </div>
           ))}
         </div>
-      </div>
+      </Card>
 
-      <div className="rounded-lg border p-4">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Abilities</h2>
-          <button
-            type="button"
+      <Card>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="text-lg font-bold tracking-tight">Abilities</h2>
+          <InvertedButton
+            buttonName="Add Ability"
             onClick={addAbility}
-            className="rounded-md border px-3 py-1 text-sm hover:bg-gray-50"
-          >
-            Add ability
-          </button>
+            variant="md"
+          />
         </div>
 
         <div className="space-y-3">
           {form.abilities.map((ability, index) => (
             <div key={index} className="flex items-center gap-3">
-              <input
-                type="text"
-                value={ability}
-                onChange={(e) => updateAbility(index, e.target.value)}
-                className="w-full rounded-md border px-3 py-2"
-                placeholder="Ability name"
+              <InputField
+                fieldType="text"
+                fieldValue={ability}
+                onChange={(ev) => updateAbility(index, ev.target.value)}
+                placeholder="ability name"
               />
-              <button
-                type="button"
+              <InvertedButton
+                buttonName="Remove"
                 onClick={() => removeAbility(index)}
-                className="rounded-md border px-3 py-2 text-sm hover:bg-gray-50"
-              >
-                Remove
-              </button>
+                variant="md"
+              />
             </div>
           ))}
         </div>
-      </div>
+      </Card>
 
       <div className="space-y-3">
         {errorMessage && (
-          <div className="rounded-md bg-red-100 px-4 py-3 text-sm text-red-700">
+          <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
             {errorMessage}
           </div>
         )}
-        <div className="flex gap-3">
-          <button
-            type="submit"
-            className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
-          >
-            Create Pokémon
-          </button>
-          <button
-            type="button"
+        <div className="flex flex-wrap gap-3">
+          <Button buttonName="Create Pokémon" type="submit" />
+          <InvertedButton
+            buttonName="Cancel"
             onClick={() => onFinishCreate(null)}
-            className="rounded-md border px-4 py-2 hover:bg-gray-50"
-          >
-            Cancel
-          </button>
+          />
         </div>
       </div>
     </form>

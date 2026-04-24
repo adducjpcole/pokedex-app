@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import properCase from '@/utils/properCase.js';
+import Button from './components/Button.jsx';
+import Card from './components/Card.jsx';
+import InputField from './components/InputField.jsx';
+import InvertedButton from './components/InvertedButton.jsx';
+import LabeledField from './components/LabeledField.jsx';
+import LabeledInputField from './components/LabeledInputField.jsx';
 
 /**
  * @param {Object} props
  * @param {import('@/globals.d.js').Pokemon} props.pokemon
- * @param {(customPokemon: import('@/globals.d.js').CustomPokemon) => void} props.onFinishEdit
+ * @param {(customPokemon: import('@/globals.d.js').CustomPokemon|null) => void} props.onFinishEdit
  */
 export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
   const [errorMessage, setErrorMessage] = useState('');
@@ -76,135 +81,121 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-bold inline-block px-2 py-1">
-          Editing {properCase(form.name)}
-        </h1>
-      </div>
-
-      <div className="flex gap-6">
-        <div className="w-40 shrink-0">
-          {form.image && (
-            <img
-              src={form.image}
-              alt={form.name}
-              className="h-40 w-40 rounded-lg border object-contain p-2"
-            />
-          )}
-        </div>
-
-        <div className="flex-1 space-y-4">
-          <div>
-            <label className="block text-sm font-medium">Name</label>
-            <input
-              type="text"
-              value={form.name}
-              onChange={(e) => updateField('name', e.target.value)}
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
+    <form onSubmit={handleSubmit} className="space-y-5 pb-8">
+      <Card>
+        <div className="flex gap-5 flex-row items-start">
+          <div className="flex shrink-0 items-center justify-center rounded-4xl border border-slate-200 bg-slate-50 p-4 w-1/3 aspect-square">
+            {pokemon.image ? (
+              <img
+                src={pokemon.image}
+                className="h-full w-full object-contain"
+              />
+            ) : (
+              <div className="flex items-center justify-center text-center text-sm text-slate-400 uppercase">
+                No Image Available
+              </div>
+            )}
           </div>
 
-          <div>
-            <label className="block text-sm font-medium">Description</label>
-            <textarea
-              value={form.desc}
-              onChange={(e) => updateField('desc', e.target.value)}
-              rows={4}
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
-          </div>
+          <div className="flex-1 space-y-4">
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-rose-500">
+                #{String(form.id).padStart(3, '0')}
+              </p>
+              <h1 className="font-black tracking-tight text-slate-900 text-4xl capitalize">
+                {form.name}
+              </h1>
+            </div>
 
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium">Weight</label>
-              <input
-                type="number"
-                value={form.weight}
-                onChange={(e) => updateField('weight', Number(e.target.value))}
-                className="mt-1 w-full rounded-md border px-3 py-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium">Height</label>
-              <input
-                type="number"
-                step="0.1"
-                value={form.height}
-                onChange={(e) => updateField('height', Number(e.target.value))}
-                className="mt-1 w-full rounded-md border px-3 py-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium">
-                Base Experience
-              </label>
-              <input
-                type="number"
-                value={form.baseExperience}
-                onChange={(e) =>
-                  updateField('baseExperience', Number(e.target.value))
+            <LabeledInputField
+              fieldName="Name"
+              fieldType="text"
+              fieldValue={form.name}
+              onChange={(ev) => updateField('name', ev.target.value)}
+            />
+
+            <div className="grid gap-4 grid-cols-3">
+              <LabeledInputField
+                fieldName="Weight"
+                fieldType="number"
+                fieldValue={form.weight}
+                onChange={(ev) =>
+                  updateField('weight', Number(ev.target.value))
                 }
-                className="mt-1 w-full rounded-md border px-3 py-2"
+              />
+
+              <LabeledInputField
+                fieldName="Height"
+                fieldType="number"
+                fieldValue={form.height}
+                onChange={(ev) =>
+                  updateField('height', Number(ev.target.value))
+                }
+              />
+
+              <LabeledInputField
+                fieldName="Base Exp"
+                fieldType="number"
+                fieldValue={form.baseExperience}
+                onChange={(ev) =>
+                  updateField('baseExperience', Number(ev.target.value))
+                }
               />
             </div>
+
+            <LabeledField fieldName="Description">
+              <textarea
+                value={form.desc}
+                onChange={(ev) => updateField('desc', ev.target.value)}
+                rows={4}
+                className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
+              />
+            </LabeledField>
           </div>
         </div>
-      </div>
+      </Card>
 
-      <div className="rounded-lg border p-4">
-        <div className="mb-3 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">Abilities</h2>
-          <button
-            type="button"
+      <Card>
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="text-lg font-bold tracking-tight">Abilities</h2>
+          <InvertedButton
+            buttonName="Add Ability"
             onClick={addAbility}
-            className="rounded-md border px-3 py-1 text-sm hover:bg-gray-50"
-          >
-            Add ability
-          </button>
+            variant="md"
+          />
         </div>
 
         <div className="space-y-3">
           {form.abilities.map((ability, index) => (
             <div key={index} className="flex items-center gap-3">
-              <input
-                type="text"
-                value={ability}
-                onChange={(e) => updateAbility(index, e.target.value)}
-                className="w-full rounded-md border px-3 py-2"
+              <InputField
+                fieldType="text"
+                fieldValue={ability}
+                onChange={(ev) => updateAbility(index, ev.target.value)}
+                placeholder="ability name"
               />
-              <button
-                type="button"
+              <InvertedButton
+                buttonName="Remove"
                 onClick={() => removeAbility(index)}
-                className="rounded-md border px-3 py-2 text-sm hover:bg-gray-50"
-              >
-                Remove
-              </button>
+                variant="md"
+              />
             </div>
           ))}
         </div>
-      </div>
+      </Card>
 
       <div className="space-y-3">
         {errorMessage && (
-          <div className="rounded-md bg-red-100 px-4 py-3 text-sm text-red-700">
+          <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
             {errorMessage}
           </div>
         )}
-        <div className="flex gap-3">
-          <button
-            type="submit"
-            className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
-          >
-            Save changes
-          </button>
-          <button
-            type="button"
-            onClick={() => onFinishEdit(pokemon)}
-            className="rounded-md border px-4 py-2 hover:bg-gray-50"
-          >
-            Cancel
-          </button>
+        <div className="flex flex-wrap gap-3">
+          <Button buttonName="Save Changes" type="submit" />
+          <InvertedButton
+            buttonName="Cancel"
+            onClick={() => onFinishEdit(null)}
+          />
         </div>
       </div>
     </form>

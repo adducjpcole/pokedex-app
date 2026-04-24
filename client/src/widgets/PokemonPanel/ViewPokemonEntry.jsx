@@ -1,4 +1,46 @@
-import properCase from '@/utils/properCase.js';
+import Button from './components/Button.jsx';
+import Card from './components/Card.jsx';
+import InvertedButton from './components/InvertedButton.jsx';
+
+/**
+ * @param {Object} props
+ * @param {string} props.fieldName
+ * @param {any} props.value
+ * @returns
+ */
+function Field({ fieldName, value }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
+      <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-slate-400">
+        {fieldName}
+      </p>
+      <p className="mt-1 text-lg font-semibold text-slate-900">{value}</p>
+    </div>
+  );
+}
+
+/**
+ * @param {Object} props
+ * @param {string} props.statName
+ * @param {number} props.value
+ * @param {number} props.percent
+ */
+function StatBar({ statName, value, percent }) {
+  return (
+    <div key={statName} className="space-y-2">
+      <div className="flex items-center justify-between text-sm">
+        <span className="font-medium text-slate-700 uppercase">{statName}</span>
+        <span className="font-semibold text-slate-900">{value}</span>
+      </div>
+      <div className="h-2 overflow-hidden rounded-full bg-slate-100">
+        <div
+          className="h-full rounded-full bg-linear-to-r from-rose-500 to-amber-400"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
+    </div>
+  );
+}
 
 /**
  * @param {Object} props
@@ -16,101 +58,105 @@ export default function ViewPokemonEntry({ pokemon, onDelete, onStartEdit }) {
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Failed to delete Pokemon');
+    if (!res.ok)
+      throw new Error(data.error || 'Something went wrong (Try again later)');
   }
 
+  const statPeak = Math.max(...pokemon.stats.map((stat) => stat.value), 1);
+
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold px-2 py-1">
-          {properCase(pokemon.name)}
-        </h1>
-      </div>
-
-      <div className="flex gap-6">
-        <div className="w-40 shrink-0">
-          {pokemon.image && (
-            <img
-              src={pokemon.image}
-              alt={pokemon.name}
-              className="h-40 w-40 rounded-lg border object-contain p-2"
-            />
-          )}
-        </div>
-
-        <div className="flex-1 space-y-4">
-          <div>
-            <h2 className="text-sm font-medium">Description</h2>
-            <p className="mt-1 text-sm">{pokemon.desc}</p>
+    <div className="space-y-5 pb-8">
+      <Card>
+        <div className="flex gap-5 flex-row items-start">
+          <div className="flex shrink-0 items-center justify-center rounded-4xl border border-slate-200 bg-slate-50 p-4 w-1/3 aspect-square">
+            {pokemon.image ? (
+              <img
+                src={pokemon.image}
+                className="h-full w-full object-contain"
+              />
+            ) : (
+              <div className="flex items-center justify-center text-center text-sm text-slate-400">
+                No Image
+              </div>
+            )}
           </div>
 
-          <div className="grid grid-cols-3 gap-4 text-sm">
-            <div>
-              <span className="block font-medium">Weight</span>
-              <span>{pokemon.weight}</span>
+          <div className="flex-1 space-y-4">
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-rose-500">
+                #{String(pokemon.id).padStart(3, '0')}
+              </p>
+              <h1 className="font-black tracking-tight text-slate-900 text-4xl capitalize">
+                {pokemon.name}
+              </h1>
+              <p className="max-w-2xl text-sm leading-6 text-slate-600">
+                {pokemon.desc}
+              </p>
             </div>
-            <div>
-              <span className="block font-medium">Height</span>
-              <span>{pokemon.height}</span>
-            </div>
-            <div>
-              <span className="block font-medium">Base Experience</span>
-              <span>{pokemon.baseExperience}</span>
+
+            <div className="grid gap-3 grid-cols-3">
+              <Field fieldName="Weight" value={pokemon.weight}></Field>
+              <Field fieldName="Height" value={pokemon.height}></Field>
+              <Field
+                fieldName="Base Exp"
+                value={pokemon.baseExperience}
+              ></Field>
             </div>
           </div>
         </div>
-      </div>
+      </Card>
 
-      <div className="rounded-lg border p-4">
-        <h2 className="mb-3 text-lg font-semibold">Stats</h2>
-        <div className="space-y-2">
+      <Card>
+        <h2 className="mb-4 flex items-center justify-between gap-3 text-lg font-bold tracking-tight">
+          Stats
+        </h2>
+
+        <div className="space-y-4">
           {pokemon.stats.map((stat) => (
-            <div key={stat.name} className="flex justify-between text-sm">
-              <span className="font-medium">{properCase(stat.name)}</span>
-              <span>{stat.value}</span>
-            </div>
+            <StatBar
+              key={stat.name}
+              statName={stat.name}
+              value={stat.value}
+              percent={Math.max(6, Math.round((stat.value / statPeak) * 100))}
+            />
           ))}
         </div>
-      </div>
+      </Card>
 
-      <div className="rounded-lg border p-4">
-        <h2 className="mb-3 text-lg font-semibold">Abilities</h2>
+      <Card>
+        <h2 className="mb-4 text-lg font-bold tracking-tight">Abilities</h2>
         <div className="flex flex-wrap gap-2">
           {pokemon.abilities.map((ability, index) => (
-            <span key={index} className="rounded-md border px-3 py-1 text-sm">
+            <span
+              key={index}
+              className="rounded-full border border-rose-200 bg-rose-50 px-3 py-1.5 text-sm font-medium text-rose-700 capitalize"
+            >
               {ability}
             </span>
           ))}
         </div>
-      </div>
+      </Card>
 
       {pokemon.cries && (
-        <div className="rounded-lg border p-4">
-          <h2 className="mb-3 text-lg font-semibold">Cries</h2>
+        <Card>
+          <h2 className="mb-4 text-lg font-bold tracking-tight">Cries</h2>
           <audio controls key={pokemon.cries} className="w-full">
             <source src={pokemon.cries} type="audio/mpeg" />
             Your browser does not support the audio tag.
           </audio>
-        </div>
+        </Card>
       )}
 
-      <div className="flex gap-3">
-        <button
-          onClick={() => onStartEdit(pokemon)}
-          className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
-        >
-          Edit
-        </button>
-        <button
+      <div className="flex flex-wrap gap-3">
+        <Button buttonName="Edit Entry" onClick={() => onStartEdit(pokemon)} />
+        <InvertedButton
+          buttonName="Delete"
           onClick={() => {
             handleDelete();
 
             onDelete(pokemon);
           }}
-          className="rounded-md border px-4 py-2 hover:bg-gray-50"
-        >
-          Delete
-        </button>
+        />
       </div>
     </div>
   );
