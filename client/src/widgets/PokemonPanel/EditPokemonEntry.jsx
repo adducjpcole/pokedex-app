@@ -7,8 +7,13 @@ import properCase from '@/utils/properCase.js';
  * @param {(customPokemon: import('@/globals.d.js').CustomPokemon) => void} props.onFinishEdit
  */
 export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
-  const [updatedPokemon, setForm] = useState(pokemon);
+  const [form, setForm] = useState(pokemon);
 
+  /**
+   * @template {keyof import('@/globals.d.js').CustomPokemon} T
+   * @param {T} field
+   * @param {import('@/globals.d.js').CustomPokemon[T]} value
+   */
   function updateField(field, value) {
     setForm((prev) => ({
       ...prev,
@@ -16,20 +21,15 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
     }));
   }
 
-  function updateStat(index, value) {
-    setForm((prev) => ({
-      ...prev,
-      stats: prev.stats.map((stat, i) =>
-        i === index ? { ...stat, value: Number(value) } : stat,
-      ),
-    }));
-  }
-
-  function updateAbility(index, value) {
+  /**
+   * @param {number} idx
+   * @param {string} val
+   */
+  function updateAbility(idx, val) {
     setForm((prev) => ({
       ...prev,
       abilities: prev.abilities.map((ability, i) =>
-        i === index ? value : ability,
+        i === idx ? val : ability,
       ),
     }));
   }
@@ -41,50 +41,50 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
     }));
   }
 
-  function removeAbility(index) {
+  /**
+   * @param {number} idx
+   */
+  function removeAbility(idx) {
     setForm((prev) => ({
       ...prev,
-      abilities: prev.abilities.filter((_, i) => i !== index),
+      abilities: prev.abilities.filter((_, i) => i !== idx),
     }));
   }
 
   /**
-   * @param {import('react').SubmitEvent<HTMLFormElement>} e
+   * @param {import('react').SubmitEvent<HTMLFormElement>} ev
    */
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSubmit(ev) {
+    ev.preventDefault();
 
-    const res = await fetch(
-      `http://localhost:9443/pokemon/${updatedPokemon.id}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedPokemon),
+    const res = await fetch(`http://localhost:9443/pokemon/${form.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify(form),
+    });
 
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
 
-    onFinishEdit(updatedPokemon);
+    onFinishEdit(form);
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <h1 className="text-2xl font-bold inline-block px-2 py-1">
-          Editing {properCase(updatedPokemon.name)}
+          Editing {properCase(form.name)}
         </h1>
       </div>
 
       <div className="flex gap-6">
         <div className="w-40 shrink-0">
-          {updatedPokemon.image && (
+          {form.image && (
             <img
-              src={updatedPokemon.image}
-              alt={updatedPokemon.name}
+              src={form.image}
+              alt={form.name}
               className="h-40 w-40 rounded-lg border object-contain p-2"
             />
           )}
@@ -95,7 +95,7 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
             <label className="block text-sm font-medium">Name</label>
             <input
               type="text"
-              value={updatedPokemon.name}
+              value={form.name}
               onChange={(e) => updateField('name', e.target.value)}
               className="mt-1 w-full rounded-md border px-3 py-2"
             />
@@ -104,7 +104,7 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
           <div>
             <label className="block text-sm font-medium">Description</label>
             <textarea
-              value={updatedPokemon.desc}
+              value={form.desc}
               onChange={(e) => updateField('desc', e.target.value)}
               rows={4}
               className="mt-1 w-full rounded-md border px-3 py-2"
@@ -116,7 +116,7 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
               <label className="block text-sm font-medium">Weight</label>
               <input
                 type="number"
-                value={updatedPokemon.weight}
+                value={form.weight}
                 onChange={(e) => updateField('weight', Number(e.target.value))}
                 className="mt-1 w-full rounded-md border px-3 py-2"
               />
@@ -126,7 +126,7 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
               <input
                 type="number"
                 step="0.1"
-                value={updatedPokemon.height}
+                value={form.height}
                 onChange={(e) => updateField('height', Number(e.target.value))}
                 className="mt-1 w-full rounded-md border px-3 py-2"
               />
@@ -137,7 +137,7 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
               </label>
               <input
                 type="number"
-                value={updatedPokemon.baseExperience}
+                value={form.baseExperience}
                 onChange={(e) =>
                   updateField('baseExperience', Number(e.target.value))
                 }
@@ -145,25 +145,6 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
               />
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="rounded-lg border p-4">
-        <h2 className="mb-3 text-lg font-semibold">Stats</h2>
-        <div className="space-y-3">
-          {updatedPokemon.stats.map((stat, index) => (
-            <div key={stat.name} className="flex items-center gap-3">
-              <span className="w-40 text-sm font-medium">
-                {properCase(stat.name)}
-              </span>
-              <input
-                type="number"
-                value={stat.value}
-                onChange={(e) => updateStat(index, e.target.value)}
-                className="w-full rounded-md border px-3 py-2"
-              />
-            </div>
-          ))}
         </div>
       </div>
 
@@ -180,7 +161,7 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
         </div>
 
         <div className="space-y-3">
-          {updatedPokemon.abilities.map((ability, index) => (
+          {form.abilities.map((ability, index) => (
             <div key={index} className="flex items-center gap-3">
               <input
                 type="text"
