@@ -16,19 +16,19 @@ const UPLOAD_DIR = './data/uploads';
 await mkdir(UPLOAD_DIR, { recursive: true });
 
 const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, UPLOAD_DIR),
-  filename: (_req, file, cb) => {
+  destination: (_req, _file, callback) => callback(null, UPLOAD_DIR),
+  filename: (_req, file, callback) => {
     const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    cb(
-      null,
-      `${unique}-${path.basename(file.originalname)}${path.extname(file.originalname)}`,
-    );
+    callback(null, `${unique}-${path.extname(file.originalname)}`);
   },
 });
 
 const upload = multer({
   storage,
-  limits: { fileSize: 2 * 1024 * 1024 },
+  limits: {
+    // approx 2mb
+    fileSize: 2 * 1024 * 1024,
+  },
 });
 
 router.post('/', upload.single('image'), createPokemon);

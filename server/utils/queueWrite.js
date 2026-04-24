@@ -14,13 +14,8 @@ const locks = new Map();
  * @returns
  */
 function lockKey(file) {
-  if (typeof file === 'string') {
-    return `path:${path.resolve(file)}`;
-  }
-
-  if (typeof file === 'number') {
-    return `fd:${file}`;
-  }
+  if (typeof file === 'string') return `path:${path.resolve(file)}`;
+  if (typeof file === 'number') return `fd:${file}`;
 
   return `other:${String(file)}`;
 }
@@ -37,9 +32,7 @@ export default function queueWrite(fn, file) {
     .then(() => fn(file))
     .catch(() => fn(file))
     .finally(() => {
-      if (locks.get(key) === next) {
-        locks.delete(key);
-      }
+      if (locks.get(key) === next) locks.delete(key);
     });
 
   locks.set(key, next);

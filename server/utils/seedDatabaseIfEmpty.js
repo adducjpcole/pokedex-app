@@ -39,7 +39,7 @@ export default async function seedDatabaseIfEmpty(dataDir, dataFile) {
         image: details.sprites?.front_default ?? null,
         desc:
           species.flavor_text_entries
-            .find((e) => e.language.name === 'en')
+            .find((ev) => ev.language.name === 'en')
             ?.flavor_text.replace(/\n|\f/g, ' ') || '',
         weight: Number(((details.weight ?? 0) * 0.1).toFixed(4)),
         height: Number(((details.height ?? 0) * 0.1).toFixed(4)),

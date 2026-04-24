@@ -21,9 +21,7 @@ async function startServer() {
   await mkdir(UPLOAD_DIR, { recursive: true });
   await seedDatabaseIfEmpty(DATA_DIR, DATA_FILE);
 
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
 
 startServer().catch((err) => {
