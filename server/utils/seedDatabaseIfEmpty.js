@@ -9,12 +9,10 @@ import queueWrite from './queueWrite.js';
 export default async function seedDatabaseIfEmpty(dataDir, dataFile) {
   await mkdir(dataDir, { recursive: true });
 
-  let existing = [];
   if (existsSync(dataFile)) {
     const raw = await readFile(dataFile, 'utf8');
-    existing = raw.trim() ? JSON.parse(raw) : [];
+    if (raw.trim().length > 0) return;
   }
-  if (existing.length > 0) return;
 
   const res = await fetch(
     'https://pokeapi.co/api/v2/pokemon?offset=30&limit=30',

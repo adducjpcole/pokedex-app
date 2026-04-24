@@ -53,7 +53,7 @@ export default function App() {
 
       <main>
         <div className="grid grid-cols-2 md:grid-cols-6 gap-x-8 gap-y-4">
-          {pokemonList && pokemonList.length > 0 ? (
+          {pokemonList ? (
             pokemonList.map((v) => (
               <PokemonListItem
                 key={v.id}
