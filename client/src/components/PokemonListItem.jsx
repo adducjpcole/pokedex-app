@@ -4,7 +4,7 @@ import properCase from '../utils/properCase';
  * @param {Object} props
  * @param {React.MouseEventHandler<HTMLButtonElement>} props.onClick
  * @param {string} props.name
- * @param {string|undefined} props.image
+ * @param {string|null} props.image
  * @returns
  */
 export default function PokemonListItem({ onClick, name, image }) {
@@ -14,7 +14,7 @@ export default function PokemonListItem({ onClick, name, image }) {
       onClick={onClick}
     >
       <h1>{properCase(name)}</h1>
-      <img src={image} alt={name} />
+      {image && <img src={image} alt={name} />}
     </button>
   );
 }

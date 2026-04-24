@@ -78,7 +78,7 @@ export default function App() {
                   }
                 }}
                 name={v.name}
-                image={v.image ?? ''}
+                image={v.image}
               />
             ))
           ) : (
@@ -87,55 +87,55 @@ export default function App() {
         </div>
       </main>
 
-      {pokemon && (
-        <PokemonPanel
-          isOpen={isPanelOpen}
-          pokemon={pokemon}
-          mode={panelMode}
-          onClose={() => setPanelOpen(false)}
-          onDelete={(deletedPokemon) => {
-            setPanelOpen(false);
-            setPokemonList((prev) =>
-              prev.filter((p) => p.id !== deletedPokemon.id),
-            );
+      <PokemonPanel
+        isOpen={isPanelOpen}
+        pokemon={pokemon}
+        mode={panelMode}
+        onClose={() => setPanelOpen(false)}
+        onDelete={(deletedPokemon) => {
+          setPanelOpen(false);
+          setPokemonList((prev) =>
+            prev.filter((p) => p.id !== deletedPokemon.id),
+          );
 
+          setTimeout(() => {
+            setPokemon(null);
+          }, 150);
+        }}
+        onStartEdit={() => {
+          if (isPanelOpen) {
+            setPanelOpen(false);
             setTimeout(() => {
-              setPokemon(null);
-            }, 150);
-          }}
-          onStartEdit={() => {
-            if (isPanelOpen) {
-              setPanelOpen(false);
-              setTimeout(() => {
-                setPanelMode('edit');
-                setPanelOpen(true);
-              }, 150);
-            } else {
               setPanelMode('edit');
               setPanelOpen(true);
-            }
-          }}
-          onFinishEdit={(updatedPokemon) => {
-            setPokemonList((prev) => {
-              const index = prev.findIndex((p) => p.id === updatedPokemon.id);
-              if (index === -1) return prev;
+            }, 150);
+          } else {
+            setPanelMode('edit');
+            setPanelOpen(true);
+          }
+        }}
+        onFinishEdit={(updatedPokemon) => {
+          setPokemonList((prev) => {
+            const index = prev.findIndex((p) => p.id === updatedPokemon.id);
+            if (index === -1) return prev;
 
-              const next = [...prev];
-              next[index] = updatedPokemon;
-              return next;
-            });
-            setPokemon(updatedPokemon);
+            const next = [...prev];
+            next[index] = updatedPokemon;
+            return next;
+          });
+          setPokemon(updatedPokemon);
 
-            setPanelOpen(false);
-            setPanelMode('view');
-          }}
-          onFinishCreate={(createdPokemon) => {
+          setPanelOpen(false);
+          setPanelMode('view');
+        }}
+        onFinishCreate={(createdPokemon) => {
+          if (createdPokemon !== null)
             setPokemonList((prev) => [...prev, createdPokemon]);
-            setPanelOpen(false);
-            setPanelMode('view');
-          }}
-        />
-      )}
+
+          setPanelOpen(false);
+          setPanelMode('view');
+        }}
+      />
     </div>
   );
 }

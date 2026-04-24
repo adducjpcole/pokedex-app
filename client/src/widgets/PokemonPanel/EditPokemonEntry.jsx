@@ -66,7 +66,7 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
+    if (!res.ok) throw new Error(data.error || 'Failed to update Pokemon');
 
     onFinishEdit(form);
   }

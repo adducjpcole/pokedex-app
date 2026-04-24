@@ -16,7 +16,7 @@ export default function ViewPokemonEntry({ pokemon, onDelete, onStartEdit }) {
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
+    if (!res.ok) throw new Error(data.error || 'Failed to delete Pokemon');
   }
 
   return (
@@ -84,7 +84,7 @@ export default function ViewPokemonEntry({ pokemon, onDelete, onStartEdit }) {
         </div>
       </div>
 
-      {pokemon.cries !== null && (
+      {pokemon.cries && (
         <div className="rounded-lg border p-4">
           <h2 className="mb-3 text-lg font-semibold">Cries</h2>
           <audio controls key={pokemon.cries} className="w-full">

@@ -1,16 +1,17 @@
+import CreatePokemonEntry from './CreatePokemonEntry.jsx';
 import EditPokemonEntry from './EditPokemonEntry.jsx';
 import ViewPokemonEntry from './ViewPokemonEntry.jsx';
 
 /**
  * @param {Object} props
  * @param {boolean} props.isOpen
- * @param {import('@/globals.d.js').Pokemon} props.pokemon
+ * @param {import('@/globals.d.js').Pokemon|null} props.pokemon
  * @param {import('@/globals.d.js').PokemonPanelMode} props.mode
  * @param {() => void} props.onClose
  * @param {(deletedPokemon: import('@/globals.d.js').Pokemon) => void} props.onDelete
  * @param {(pendingPokemon: import('@/globals.d.js').Pokemon) => void} props.onStartEdit
  * @param {(updatedPokemon: import('@/globals.d.js').CustomPokemon) => void} props.onFinishEdit
- * @param {(createdPokemon: import('@/globals.d.js').CustomPokemon) => void} props.onFinishCreate
+ * @param {(createdPokemon: import('@/globals.d.js').CustomPokemon | null) => void} props.onFinishCreate
  * @returns
  */
 export default function PokemonPanel({
@@ -46,18 +47,9 @@ export default function PokemonPanel({
       {pokemon && mode === 'edit' && (
         <EditPokemonEntry pokemon={pokemon} onFinishEdit={onFinishEdit} />
       )}
-      {mode === 'create' && <p>creating new pokemon</p>}
-
-      <div>
-        {mode === 'create' && (
-          <button
-            className="hover:cursor-pointer"
-            onClick={() => onFinishCreate(pokemon)}
-          >
-            Create Entry
-          </button>
-        )}
-      </div>
+      {mode === 'create' && (
+        <CreatePokemonEntry onFinishCreate={onFinishCreate} />
+      )}
     </aside>
   );
 }
