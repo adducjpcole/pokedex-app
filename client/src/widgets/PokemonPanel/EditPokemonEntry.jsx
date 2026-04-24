@@ -3,79 +3,91 @@ import properCase from '@/utils/properCase.js';
 
 /**
  * @param {Object} props
- * @param {Pokemon} props.pokemon
- * @param {(updatedPokemon: Pokemon) => void} [props.onSave]
- * @param {() => void} [props.onCancel]
+ * @param {import('@/globals.d.js').Pokemon} props.pokemon
+ * @param {(customPokemon: import('@/globals.d.js').CustomPokemon) => void} props.onFinishEdit
  */
-export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
-  const [form, setForm] = useState(pokemon);
+export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
+  const [updatedPokemon, setForm] = useState(pokemon);
 
-  const updateField = (field, value) => {
+  function updateField(field, value) {
     setForm((prev) => ({
       ...prev,
       [field]: value,
     }));
-  };
+  }
 
-  const updateStat = (index, value) => {
+  function updateStat(index, value) {
     setForm((prev) => ({
       ...prev,
       stats: prev.stats.map((stat, i) =>
         i === index ? { ...stat, value: Number(value) } : stat,
       ),
     }));
-  };
+  }
 
-  const updateAbility = (index, value) => {
+  function updateAbility(index, value) {
     setForm((prev) => ({
       ...prev,
       abilities: prev.abilities.map((ability, i) =>
         i === index ? value : ability,
       ),
     }));
-  };
+  }
 
-  const addAbility = () => {
+  function addAbility() {
     setForm((prev) => ({
       ...prev,
       abilities: [...prev.abilities, ''],
     }));
-  };
+  }
 
-  const removeAbility = (index) => {
+  function removeAbility(index) {
     setForm((prev) => ({
       ...prev,
       abilities: prev.abilities.filter((_, i) => i !== index),
     }));
-  };
+  }
 
-  const handleSubmit = (e) => {
+  /**
+   * @param {import('react').SubmitEvent<HTMLFormElement>} e
+   */
+  async function handleSubmit(e) {
     e.preventDefault();
-    onSave?.(form);
-  };
+
+    const res = await fetch(
+      `http://localhost:9443/pokemon/${updatedPokemon.id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedPokemon),
+      },
+    );
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    onFinishEdit(updatedPokemon);
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <h1 className="text-2xl font-bold inline-block px-2 py-1">
-          Editing {properCase(form.name)}
+          Editing {properCase(updatedPokemon.name)}
         </h1>
       </div>
 
       <div className="flex gap-6">
         <div className="w-40 shrink-0">
-          <img
-            src={form.image}
-            alt={form.name}
-            className="h-40 w-40 rounded-lg border object-contain p-2"
-          />
-          <label className="mt-3 block text-sm font-medium">Image URL</label>
-          <input
-            type="text"
-            value={form.image}
-            onChange={(e) => updateField('image', e.target.value)}
-            className="mt-1 w-full rounded-md border px-3 py-2 text-sm"
-          />
+          {updatedPokemon.image && (
+            <img
+              src={updatedPokemon.image}
+              alt={updatedPokemon.name}
+              className="h-40 w-40 rounded-lg border object-contain p-2"
+            />
+          )}
         </div>
 
         <div className="flex-1 space-y-4">
@@ -83,7 +95,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
             <label className="block text-sm font-medium">Name</label>
             <input
               type="text"
-              value={form.name}
+              value={updatedPokemon.name}
               onChange={(e) => updateField('name', e.target.value)}
               className="mt-1 w-full rounded-md border px-3 py-2"
             />
@@ -92,7 +104,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
           <div>
             <label className="block text-sm font-medium">Description</label>
             <textarea
-              value={form.desc}
+              value={updatedPokemon.desc}
               onChange={(e) => updateField('desc', e.target.value)}
               rows={4}
               className="mt-1 w-full rounded-md border px-3 py-2"
@@ -104,7 +116,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
               <label className="block text-sm font-medium">Weight</label>
               <input
                 type="number"
-                value={form.weight}
+                value={updatedPokemon.weight}
                 onChange={(e) => updateField('weight', Number(e.target.value))}
                 className="mt-1 w-full rounded-md border px-3 py-2"
               />
@@ -114,7 +126,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
               <input
                 type="number"
                 step="0.1"
-                value={form.height}
+                value={updatedPokemon.height}
                 onChange={(e) => updateField('height', Number(e.target.value))}
                 className="mt-1 w-full rounded-md border px-3 py-2"
               />
@@ -125,7 +137,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
               </label>
               <input
                 type="number"
-                value={form.baseExperience}
+                value={updatedPokemon.baseExperience}
                 onChange={(e) =>
                   updateField('baseExperience', Number(e.target.value))
                 }
@@ -139,7 +151,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
       <div className="rounded-lg border p-4">
         <h2 className="mb-3 text-lg font-semibold">Stats</h2>
         <div className="space-y-3">
-          {form.stats.map((stat, index) => (
+          {updatedPokemon.stats.map((stat, index) => (
             <div key={stat.name} className="flex items-center gap-3">
               <span className="w-40 text-sm font-medium">
                 {properCase(stat.name)}
@@ -168,7 +180,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
         </div>
 
         <div className="space-y-3">
-          {form.abilities.map((ability, index) => (
+          {updatedPokemon.abilities.map((ability, index) => (
             <div key={index} className="flex items-center gap-3">
               <input
                 type="text"
@@ -197,7 +209,7 @@ export default function EditPokemonEntry({ pokemon, onSave, onCancel }) {
         </button>
         <button
           type="button"
-          onClick={onCancel}
+          onClick={() => onFinishEdit(pokemon)}
           className="rounded-md border px-4 py-2 hover:bg-gray-50"
         >
           Cancel

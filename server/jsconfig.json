@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "module": "nodenext",
+    "target": "es2020",
+    "allowJs": true,
+    "checkJs": true,
     "noImplicitAny": false
   },
   "exclude": ["node_modules"],

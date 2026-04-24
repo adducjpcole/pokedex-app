@@ -33,7 +33,11 @@
         "value": 76
       }
     ],
-    "abilities": ["poison-point", "rivalry", "sheer-force"],
+    "abilities": [
+      "poison-point",
+      "rivalry",
+      "sheer-force"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/31.ogg"
   },
   {
@@ -70,7 +74,11 @@
         "value": 50
       }
     ],
-    "abilities": ["poison-point", "rivalry", "hustle"],
+    "abilities": [
+      "poison-point",
+      "rivalry",
+      "hustle"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/32.ogg"
   },
   {
@@ -107,7 +115,11 @@
         "value": 65
       }
     ],
-    "abilities": ["poison-point", "rivalry", "hustle"],
+    "abilities": [
+      "poison-point",
+      "rivalry",
+      "hustle"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/33.ogg"
   },
   {
@@ -144,7 +156,11 @@
         "value": 85
       }
     ],
-    "abilities": ["poison-point", "rivalry", "sheer-force"],
+    "abilities": [
+      "poison-point",
+      "rivalry",
+      "sheer-force"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/34.ogg"
   },
   {
@@ -181,7 +197,11 @@
         "value": 35
       }
     ],
-    "abilities": ["cute-charm", "magic-guard", "friend-guard"],
+    "abilities": [
+      "cute-charm",
+      "magic-guard",
+      "friend-guard"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/35.ogg"
   },
   {
@@ -218,7 +238,11 @@
         "value": 60
       }
     ],
-    "abilities": ["cute-charm", "magic-guard", "unaware"],
+    "abilities": [
+      "cute-charm",
+      "magic-guard",
+      "unaware"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/36.ogg"
   },
   {
@@ -255,7 +279,10 @@
         "value": 65
       }
     ],
-    "abilities": ["flash-fire", "drought"],
+    "abilities": [
+      "flash-fire",
+      "drought"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/37.ogg"
   },
   {
@@ -292,7 +319,10 @@
         "value": 100
       }
     ],
-    "abilities": ["flash-fire", "drought"],
+    "abilities": [
+      "flash-fire",
+      "drought"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/38.ogg"
   },
   {
@@ -329,7 +359,11 @@
         "value": 20
       }
     ],
-    "abilities": ["cute-charm", "competitive", "friend-guard"],
+    "abilities": [
+      "cute-charm",
+      "competitive",
+      "friend-guard"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/39.ogg"
   },
   {
@@ -366,7 +400,11 @@
         "value": 45
       }
     ],
-    "abilities": ["cute-charm", "competitive", "frisk"],
+    "abilities": [
+      "cute-charm",
+      "competitive",
+      "frisk"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/40.ogg"
   },
   {
@@ -403,7 +441,10 @@
         "value": 55
       }
     ],
-    "abilities": ["inner-focus", "infiltrator"],
+    "abilities": [
+      "inner-focus",
+      "infiltrator"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/41.ogg"
   },
   {
@@ -440,7 +481,10 @@
         "value": 90
       }
     ],
-    "abilities": ["inner-focus", "infiltrator"],
+    "abilities": [
+      "inner-focus",
+      "infiltrator"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/42.ogg"
   },
   {
@@ -477,7 +521,10 @@
         "value": 30
       }
     ],
-    "abilities": ["chlorophyll", "run-away"],
+    "abilities": [
+      "chlorophyll",
+      "run-away"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/43.ogg"
   },
   {
@@ -514,7 +561,10 @@
         "value": 40
       }
     ],
-    "abilities": ["chlorophyll", "stench"],
+    "abilities": [
+      "chlorophyll",
+      "stench"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/44.ogg"
   },
   {
@@ -551,7 +601,10 @@
         "value": 50
       }
     ],
-    "abilities": ["chlorophyll", "effect-spore"],
+    "abilities": [
+      "chlorophyll",
+      "effect-spore"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/45.ogg"
   },
   {
@@ -588,7 +641,11 @@
         "value": 25
       }
     ],
-    "abilities": ["effect-spore", "dry-skin", "damp"],
+    "abilities": [
+      "effect-spore",
+      "dry-skin",
+      "damp"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/46.ogg"
   },
   {
@@ -625,7 +682,11 @@
         "value": 30
       }
     ],
-    "abilities": ["effect-spore", "dry-skin", "damp"],
+    "abilities": [
+      "effect-spore",
+      "dry-skin",
+      "damp"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/47.ogg"
   },
   {
@@ -662,7 +723,11 @@
         "value": 45
       }
     ],
-    "abilities": ["compound-eyes", "tinted-lens", "run-away"],
+    "abilities": [
+      "compound-eyes",
+      "tinted-lens",
+      "run-away"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/48.ogg"
   },
   {
@@ -699,7 +764,11 @@
         "value": 90
       }
     ],
-    "abilities": ["shield-dust", "tinted-lens", "wonder-skin"],
+    "abilities": [
+      "shield-dust",
+      "tinted-lens",
+      "wonder-skin"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/49.ogg"
   },
   {
@@ -736,7 +805,11 @@
         "value": 95
       }
     ],
-    "abilities": ["sand-veil", "arena-trap", "sand-force"],
+    "abilities": [
+      "sand-veil",
+      "arena-trap",
+      "sand-force"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/50.ogg"
   },
   {
@@ -773,7 +846,11 @@
         "value": 120
       }
     ],
-    "abilities": ["sand-veil", "arena-trap", "sand-force"],
+    "abilities": [
+      "sand-veil",
+      "arena-trap",
+      "sand-force"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/51.ogg"
   },
   {
@@ -810,7 +887,11 @@
         "value": 90
       }
     ],
-    "abilities": ["pickup", "technician", "unnerve"],
+    "abilities": [
+      "pickup",
+      "technician",
+      "unnerve"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/52.ogg"
   },
   {
@@ -847,7 +928,11 @@
         "value": 115
       }
     ],
-    "abilities": ["limber", "technician", "unnerve"],
+    "abilities": [
+      "limber",
+      "technician",
+      "unnerve"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/53.ogg"
   },
   {
@@ -884,7 +969,11 @@
         "value": 55
       }
     ],
-    "abilities": ["damp", "cloud-nine", "swift-swim"],
+    "abilities": [
+      "damp",
+      "cloud-nine",
+      "swift-swim"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/54.ogg"
   },
   {
@@ -921,7 +1010,11 @@
         "value": 85
       }
     ],
-    "abilities": ["damp", "cloud-nine", "swift-swim"],
+    "abilities": [
+      "damp",
+      "cloud-nine",
+      "swift-swim"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/55.ogg"
   },
   {
@@ -958,7 +1051,11 @@
         "value": 70
       }
     ],
-    "abilities": ["vital-spirit", "anger-point", "defiant"],
+    "abilities": [
+      "vital-spirit",
+      "anger-point",
+      "defiant"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/56.ogg"
   },
   {
@@ -995,7 +1092,11 @@
         "value": 95
       }
     ],
-    "abilities": ["vital-spirit", "anger-point", "defiant"],
+    "abilities": [
+      "vital-spirit",
+      "anger-point",
+      "defiant"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/57.ogg"
   },
   {
@@ -1032,7 +1133,11 @@
         "value": 60
       }
     ],
-    "abilities": ["intimidate", "flash-fire", "justified"],
+    "abilities": [
+      "intimidate",
+      "flash-fire",
+      "justified"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/58.ogg"
   },
   {
@@ -1069,7 +1174,11 @@
         "value": 95
       }
     ],
-    "abilities": ["intimidate", "flash-fire", "justified"],
+    "abilities": [
+      "intimidate",
+      "flash-fire",
+      "justified"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/59.ogg"
   },
   {
@@ -1106,7 +1215,11 @@
         "value": 90
       }
     ],
-    "abilities": ["water-absorb", "damp", "swift-swim"],
+    "abilities": [
+      "water-absorb",
+      "damp",
+      "swift-swim"
+    ],
     "cries": "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/60.ogg"
   }
 ]

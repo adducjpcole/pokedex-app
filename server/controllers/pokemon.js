@@ -1,43 +1,20 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import queueWrite from '../utils/queueWrite.js';
+/**
+ * @typedef {import('express').Request<
+ *   import('express-serve-static-core').ParamsDictionary,
+ *   any,
+ *   import('../globals.d.js').CustomPokemon
+ * >} PokemonRequest
+ */
 
-const DATA_FILE = './data/pokemon.json';
-
-async function readPokemonList() {
-  const raw = await readFile(DATA_FILE, 'utf8');
-  return raw.trim() ? JSON.parse(raw) : [];
-}
-
-async function writePokemonList(list) {
-  await queueWrite(() => writeFile(DATA_FILE, JSON.stringify(list, null, 2)));
-}
+import writePokemonList from '../utils/writePokemonList.js';
+import readPokemonList from '../utils/readPokemonList.js';
+import getMaxId from '../utils/getMaxId.js';
+import parseJsonField from '../utils/parseJsonField.js';
 
 /**
- * @template {{ id: number }} T
- * @param {Array<T>} list
+ * @param {PokemonRequest} req
  */
-function getNextId(list) {
-  return list.reduce((max, p) => Math.max(max, p.id ?? 0), 0) + 1;
-}
-
-function tryParseJsonField(value, fallback) {
-  if (value == null || value === '') return fallback;
-
-  if (typeof value === 'string') {
-    try {
-      return JSON.parse(value);
-    } catch {
-      return fallback;
-    }
-  }
-
-  return value;
-}
-
-/**
- * @returns {CustomPokemon|string}
- */
-function tryParsePokemonInput({ body, file }) {
+function parsePokemonInput({ body, file }) {
   const name = typeof body.name === 'string' ? body.name.trim() : '';
   const desc = typeof body.desc === 'string' ? body.desc.trim() : '';
 
@@ -45,9 +22,10 @@ function tryParsePokemonInput({ body, file }) {
   const height = Number(body.height);
   const baseExperience = Number(body.baseExperience);
 
-  const stats = tryParseJsonField(body.stats, []);
-  const abilities = tryParseJsonField(body.abilities, []);
+  const stats = parseJsonField(body.stats, []);
+  const abilities = parseJsonField(body.abilities, []);
 
+  /** @type {string | null} */
   let image = null;
   if (file) {
     image = `/uploads/${file.filename}`;
@@ -58,7 +36,9 @@ function tryParsePokemonInput({ body, file }) {
     image = body.image.trim();
   }
 
-  return {
+  /** @type {import('../globals.d.js').CustomPokemon} */
+  const parsed = {
+    // Will be set when saving
     id: -1,
     name,
     image,
@@ -69,10 +49,12 @@ function tryParsePokemonInput({ body, file }) {
     stats,
     abilities,
   };
+
+  return parsed;
 }
 
 /**
- * @param {CustomPokemon} data
+ * @param {import('../globals.d.js').CustomPokemon} data
  */
 function validatePokemon(data) {
   if (!data.name) return 'Pokemon name cannot be empty';
@@ -104,25 +86,25 @@ function validatePokemon(data) {
   return null;
 }
 
-// CREATE
+/**
+ * @param {PokemonRequest} req
+ * @param {import('express').Response} res
+ */
 export async function createPokemon(req, res) {
   try {
-    const parsed = tryParsePokemonInput(req);
-
-    if (typeof parsed === 'string') {
+    const parsed = parsePokemonInput(req);
+    if (typeof parsed === 'string')
       return res.status(400).json({ error: parsed });
-    }
 
     const validationError = validatePokemon(parsed);
-    if (validationError) {
+    if (validationError)
       return res.status(400).json({ error: validationError });
-    }
 
     const list = await readPokemonList();
 
     const newPokemon = {
       ...parsed,
-      id: getNextId(list),
+      id: getMaxId(list) + 1,
     };
 
     list.push(newPokemon);
@@ -135,7 +117,10 @@ export async function createPokemon(req, res) {
   }
 }
 
-// READ
+/**
+ * @param {import('express').Request} _req
+ * @param {import('express').Response} res
+ */
 export async function getAllPokemon(_req, res) {
   try {
     const list = await readPokemonList();
@@ -146,25 +131,103 @@ export async function getAllPokemon(_req, res) {
   }
 }
 
-// READ
+/**
+ * @param {import('express').Request<{ id: string }>} req
+ * @param {import('express').Response} res
+ */
 export async function getPokemonById(req, res) {
   try {
     const id = Number(req.params.id);
-
-    if (!Number.isInteger(id) || id <= 0) {
+    if (!Number.isInteger(id) || id <= 0)
       return res.status(400).json({ error: 'Invalid Pokemon id' });
-    }
 
     const list = await readPokemonList();
     const pokemon = list.find((p) => p.id === id);
-
-    if (!pokemon) {
-      return res.status(404).json({ error: 'Pokemon not found' });
-    }
+    if (!pokemon) return res.status(404).json({ error: 'Pokemon not found' });
 
     return res.json(pokemon);
   } catch (error) {
     console.error('Error reading Pokemon:', error);
     return res.status(500).json({ error: 'Failed to load Pokemon' });
+  }
+}
+
+/**
+ * @param {PokemonRequest} req
+ * @param {import('../globals.d.js').Pokemon} existingPokemon
+ */
+function parsePokemonUpdateInput({ body }, existingPokemon) {
+  return {
+    ...existingPokemon,
+    name: typeof body.name === 'string' ? body.name.trim() : '',
+    desc: typeof body.desc === 'string' ? body.desc.trim() : '',
+    weight: Number(body.weight),
+    height: Number(body.height),
+    baseExperience: Number(body.baseExperience),
+    abilities: parseJsonField(body.abilities, []),
+  };
+}
+
+/**
+ * @param {PokemonRequest} req
+ * @param {import('express').Response} res
+ */
+export async function updatePokemon(req, res) {
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0)
+      return res.status(400).json({ error: 'Invalid Pokemon id' });
+
+    const list = await readPokemonList();
+    const index = list.findIndex((p) => p.id === id);
+    if (index === -1)
+      return res.status(404).json({ error: 'Pokemon not found' });
+
+    const parsed = parsePokemonUpdateInput(req, list[index]);
+    if (typeof parsed === 'string')
+      return res.status(400).json({ error: parsed });
+
+    const validationError = validatePokemon(parsed);
+    if (validationError)
+      return res.status(400).json({ error: validationError });
+
+    const updatedPokemon = {
+      ...list[index],
+      ...parsed,
+      id,
+    };
+
+    list[index] = updatedPokemon;
+    await writePokemonList(list);
+
+    return res.json(updatedPokemon);
+  } catch (error) {
+    console.error('Error updating Pokemon:', error);
+    return res.status(500).json({ error: 'Failed to update Pokemon' });
+  }
+}
+
+/**
+ * @param {PokemonRequest} req
+ * @param {import('express').Response} res
+ */
+export async function deletePokemon(req, res) {
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id) || id <= 0)
+      return res.status(400).json({ error: 'Invalid Pokemon id' });
+
+    const list = await readPokemonList();
+    const index = list.findIndex((p) => p.id === id);
+    if (index === -1)
+      return res.status(404).json({ error: 'Pokemon not found' });
+
+    const [deletedPokemon] = list.splice(index, 1);
+    await writePokemonList(list);
+
+    return res.json(deletedPokemon);
+  } catch (error) {
+    console.error('Error deleting Pokemon:', error);
+    return res.status(500).json({ error: 'Failed to delete Pokemon' });
   }
 }

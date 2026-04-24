@@ -4,8 +4,10 @@ import path from 'node:path';
 import { mkdir } from 'node:fs/promises';
 import {
   createPokemon,
+  deletePokemon,
   getAllPokemon,
   getPokemonById,
+  updatePokemon,
 } from '../controllers/pokemon.js';
 
 const router = Router();
@@ -32,5 +34,7 @@ const upload = multer({
 router.post('/', upload.single('image'), createPokemon);
 router.get('/', getAllPokemon);
 router.get('/:id', getPokemonById);
+router.put('/:id', updatePokemon);
+router.delete('/:id', deletePokemon);
 
 export default router;

@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
+    "module": "es2020",
+    "target": "es2020",
+    "jsx": "react-jsx",
     "allowJs": true,
+    "checkJs": true,
     "noImplicitAny": false,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["./src/**/*", "./src/globals.d.js"]
+  "include": ["./src/**/*"]
 }

@@ -2,11 +2,23 @@ import properCase from '@/utils/properCase.js';
 
 /**
  * @param {Object} props
- * @param {Pokemon} props.pokemon
- * @param {(Pokemon) => void} props.onDelete
- * @param {(Pokemon) => void} props.onStartEdit
+ * @param {import('../../globals.d.js').Pokemon} props.pokemon
+ * @param {(pokemon: import('../../globals.d.js').Pokemon) => void} props.onDelete
+ * @param {(pokemon: import('../../globals.d.js').Pokemon) => void} props.onStartEdit
  */
 export default function ViewPokemonEntry({ pokemon, onDelete, onStartEdit }) {
+  async function handleDelete() {
+    const res = await fetch(`http://localhost:9443/pokemon/${pokemon.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -17,11 +29,13 @@ export default function ViewPokemonEntry({ pokemon, onDelete, onStartEdit }) {
 
       <div className="flex gap-6">
         <div className="w-40 shrink-0">
-          <img
-            src={pokemon.image}
-            alt={pokemon.name}
-            className="h-40 w-40 rounded-lg border object-contain p-2"
-          />
+          {pokemon.image && (
+            <img
+              src={pokemon.image}
+              alt={pokemon.name}
+              className="h-40 w-40 rounded-lg border object-contain p-2"
+            />
+          )}
         </div>
 
         <div className="flex-1 space-y-4">
@@ -82,13 +96,17 @@ export default function ViewPokemonEntry({ pokemon, onDelete, onStartEdit }) {
 
       <div className="flex gap-3">
         <button
-          onClick={onStartEdit}
+          onClick={() => onStartEdit(pokemon)}
           className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
         >
           Edit
         </button>
         <button
-          onClick={onDelete}
+          onClick={() => {
+            handleDelete();
+
+            onDelete(pokemon);
+          }}
           className="rounded-md border px-4 py-2 hover:bg-gray-50"
         >
           Delete

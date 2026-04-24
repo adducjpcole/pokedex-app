@@ -1,8 +1,11 @@
 import properCase from '../utils/properCase';
 
 /**
- * @param {string} id
- * @param {React.MouseEventHandler<HTMLButtonElement>} onClick
+ * @param {Object} props
+ * @param {React.MouseEventHandler<HTMLButtonElement>} props.onClick
+ * @param {string} props.name
+ * @param {string|undefined} props.image
+ * @returns
  */
 export default function PokemonListItem({ onClick, name, image }) {
   return (

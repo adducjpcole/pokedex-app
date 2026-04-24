@@ -56,5 +56,8 @@ export default async function seedDatabaseIfEmpty(dataDir, dataFile) {
     }),
   );
 
-  await queueWrite(() => writeFile(dataFile, JSON.stringify(seeded, null, 2)));
+  await queueWrite(
+    (file) => writeFile(file, JSON.stringify(seeded, null, 2)),
+    dataFile,
+  );
 }

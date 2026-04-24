@@ -10,6 +10,7 @@ export default defineConfig({
     port: 8443,
   },
   plugins: [
+    // Native tsconfig paths only works on tsconfig, not jsconfig
     tsconfigPaths(),
     react(),
     babel({ presets: [reactCompilerPreset()] }),

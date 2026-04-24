@@ -3,10 +3,16 @@ import PokemonListItem from './components/PokemonListItem.jsx';
 import PokemonPanel from './widgets/PokemonPanel/index.jsx';
 
 export default function App() {
-  const [pokemonList, setPokemonList] = useState([]);
-  const [pokemon, setPokemon] = useState(null);
+  const [pokemonList, setPokemonList] = useState(
+    /** @type {import('./globals.d.js').Pokemon[]} */ ([]),
+  );
+  const [pokemon, setPokemon] = useState(
+    /** @type {import('./globals.d.js').Pokemon | null} */ (null),
+  );
   const [isPanelOpen, setPanelOpen] = useState(false);
-  const [panelMode, setPanelMode] = useState('view');
+  const [panelMode, setPanelMode] = useState(
+    /** @type {import('./globals.d.js').PokemonPanelMode} */ ('view'),
+  );
 
   useEffect(() => {
     async function fetchPokemon() {
@@ -20,7 +26,7 @@ export default function App() {
     }
 
     fetchPokemon();
-  }, [panelMode]);
+  }, []);
 
   return (
     <div className="px-8 py-4">
@@ -72,8 +78,8 @@ export default function App() {
                   }
                 }}
                 name={v.name}
-                image={v.image}
-              ></PokemonListItem>
+                image={v.image ?? ''}
+              />
             ))
           ) : (
             <p>Loading...</p>
@@ -81,26 +87,55 @@ export default function App() {
         </div>
       </main>
 
-      <PokemonPanel
-        isOpen={isPanelOpen}
-        pokemon={pokemon}
-        mode={panelMode}
-        onClose={() => setPanelOpen(false)}
-        onStartEdit={() => {
-          if (isPanelOpen) {
+      {pokemon && (
+        <PokemonPanel
+          isOpen={isPanelOpen}
+          pokemon={pokemon}
+          mode={panelMode}
+          onClose={() => setPanelOpen(false)}
+          onDelete={(deletedPokemon) => {
             setPanelOpen(false);
+            setPokemonList((prev) =>
+              prev.filter((p) => p.id !== deletedPokemon.id),
+            );
+
             setTimeout(() => {
+              setPokemon(null);
+            }, 150);
+          }}
+          onStartEdit={() => {
+            if (isPanelOpen) {
+              setPanelOpen(false);
+              setTimeout(() => {
+                setPanelMode('edit');
+                setPanelOpen(true);
+              }, 150);
+            } else {
               setPanelMode('edit');
               setPanelOpen(true);
-            }, 150);
-          } else {
-            setPanelMode('edit');
-            setPanelOpen(true);
-          }
-        }}
-        onFinishEdit={() => setPanelMode('view')}
-        onFinishCreate={() => setPanelMode('view')}
-      />
+            }
+          }}
+          onFinishEdit={(updatedPokemon) => {
+            setPokemonList((prev) => {
+              const index = prev.findIndex((p) => p.id === updatedPokemon.id);
+              if (index === -1) return prev;
+
+              const next = [...prev];
+              next[index] = updatedPokemon;
+              return next;
+            });
+            setPokemon(updatedPokemon);
+
+            setPanelOpen(false);
+            setPanelMode('view');
+          }}
+          onFinishCreate={(createdPokemon) => {
+            setPokemonList((prev) => [...prev, createdPokemon]);
+            setPanelOpen(false);
+            setPanelMode('view');
+          }}
+        />
+      )}
     </div>
   );
 }

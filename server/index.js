@@ -8,7 +8,7 @@ const app = express();
 
 const PORT = 9443;
 const DATA_DIR = './data';
-const DATA_FILE = `${DATA_DIR}/pokemon.json`;
+const DATA_FILE = `${DATA_DIR}/pokemonList.json`;
 const UPLOAD_DIR = `${DATA_DIR}/uploads`;
 
 app.use(express.json());
