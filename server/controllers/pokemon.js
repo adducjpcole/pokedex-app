@@ -60,7 +60,7 @@ function parsePokemonInput(req) {
  * @param {import('../globals.d.js').CustomPokemon} data
  */
 function validatePokemon(data) {
-  if (!data.name) return 'Pokemon name cannot be empty';
+  if (!data.name) return 'Name cannot be empty';
   if (!data.desc) return 'Description cannot be empty';
 
   if (Number.isNaN(data.weight)) return 'Weight must be a number';

@@ -5,6 +5,7 @@ import { useState } from 'react';
  * @param {(createdPokemon: import('@/globals.d.js').CustomPokemon | null) => void} props.onFinishCreate
  */
 export default function CreatePokemonEntry({ onFinishCreate }) {
+  const [errorMessage, setErrorMessage] = useState('');
   const [form, setForm] = useState({
     name: '',
     desc: '',
@@ -130,11 +131,8 @@ export default function CreatePokemonEntry({ onFinishCreate }) {
 
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-      if (typeof data.error === 'string') {
-        // TODO: Show to user what should be done to fix (Use modal or something)
-      }
-
-      throw new Error(data.error || 'Failed to create Pokemon');
+      setErrorMessage(data.error || 'Something went wrong (Try again later)');
+      return;
     }
 
     onFinishCreate(data);
@@ -308,20 +306,27 @@ export default function CreatePokemonEntry({ onFinishCreate }) {
         </div>
       </div>
 
-      <div className="flex gap-3">
-        <button
-          type="submit"
-          className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
-        >
-          Create Pokémon
-        </button>
-        <button
-          type="button"
-          onClick={() => onFinishCreate(null)}
-          className="rounded-md border px-4 py-2 hover:bg-gray-50"
-        >
-          Cancel
-        </button>
+      <div className="space-y-3">
+        {errorMessage && (
+          <div className="rounded-md bg-red-100 px-4 py-3 text-sm text-red-700">
+            {errorMessage}
+          </div>
+        )}
+        <div className="flex gap-3">
+          <button
+            type="submit"
+            className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
+          >
+            Create Pokémon
+          </button>
+          <button
+            type="button"
+            onClick={() => onFinishCreate(null)}
+            className="rounded-md border px-4 py-2 hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </form>
   );

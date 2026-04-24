@@ -7,6 +7,7 @@ import properCase from '@/utils/properCase.js';
  * @param {(customPokemon: import('@/globals.d.js').CustomPokemon) => void} props.onFinishEdit
  */
 export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
+  const [errorMessage, setErrorMessage] = useState('');
   const [form, setForm] = useState(pokemon);
 
   /**
@@ -66,7 +67,10 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Failed to update Pokemon');
+    if (!res.ok) {
+      setErrorMessage(data.error || 'Something went wrong (Try again later)');
+      return;
+    }
 
     onFinishEdit(form);
   }
@@ -181,20 +185,27 @@ export default function EditPokemonEntry({ pokemon, onFinishEdit }) {
         </div>
       </div>
 
-      <div className="flex gap-3">
-        <button
-          type="submit"
-          className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
-        >
-          Save changes
-        </button>
-        <button
-          type="button"
-          onClick={() => onFinishEdit(pokemon)}
-          className="rounded-md border px-4 py-2 hover:bg-gray-50"
-        >
-          Cancel
-        </button>
+      <div className="space-y-3">
+        {errorMessage && (
+          <div className="rounded-md bg-red-100 px-4 py-3 text-sm text-red-700">
+            {errorMessage}
+          </div>
+        )}
+        <div className="flex gap-3">
+          <button
+            type="submit"
+            className="rounded-md bg-black px-4 py-2 text-white hover:bg-gray-800"
+          >
+            Save changes
+          </button>
+          <button
+            type="button"
+            onClick={() => onFinishEdit(pokemon)}
+            className="rounded-md border px-4 py-2 hover:bg-gray-50"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </form>
   );
